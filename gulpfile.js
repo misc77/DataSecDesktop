@@ -14,6 +14,12 @@ var gulp        = require('gulp'),
   
 var packageJson = require('./resources/app/package.json');
 
+gulp.task('copy-materialize-js', function() {
+    gulp.src('./resources/app/assets/js/materialize.js')
+    // Perform minification tasks, etc here
+    .pipe(gulp.dest('./resources/app/node_modules/materialize'));
+});
+
 // create the gulp task
 gulp.task('run', function () { 
   childProcess.spawn(electron, ['./resources/app'], { stdio: 'inherit' }); 
@@ -22,7 +28,6 @@ gulp.task('run', function () {
 //gulp.task('start_db', shell.task(['mongod -dbpath "C:/Data/db"']));
     
 gulp.task('release', function() {
-
     gulp.src("")
     .pipe(gulp_electron({
         src: './resources/app',
