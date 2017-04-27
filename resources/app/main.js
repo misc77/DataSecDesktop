@@ -5,17 +5,21 @@ const glob = require('glob');
 const server = require("./server");
 const ipcMain = require('electron').ipcMain;
 const ipcRenderer = require('electron').ipcRenderer;
-const iconPath = path.join(__dirname, '/assets/img/icon.png');
+const Config = require('electron-config');
+var child_process = require('child_process');
+
+app.setPath('userData', app.getAppPath());
+
+const config = new Config('conf');
+const iconPath = path.join(__dirname, config.get('icon_path'));
 const admin = "'admin'";
 
-var child_process = require('child_process');
+
 var mainWindow = null;
 let tray = null;
 
 global.directory = { path: __dirname };
-global.db_path = 'C:/Data/db';
-
-
+global.db_path = config.get('db_path');
 
 console.log('start db');
   //start up db if down
@@ -41,9 +45,9 @@ app.on('ready', function () {
     // Create the browser window.
     mainWindow = new BrowserWindow({ 
         'node-integration': true, 
-        webPreferences: {'zoomFactor': 0.75},
-        width: 1280, 
-        height: 840,
+        webPreferences: {'zoomFactor': config.get('window_zoom')},
+        width: config.get('window_width'), 
+        height: config.get('window_height'),
         title: 'Netvocat DataSec',
         icon: iconPath,
         show: false});

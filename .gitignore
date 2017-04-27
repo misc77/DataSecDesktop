@@ -2,3 +2,9 @@
 /release/
 /cache/
 
+/resources/app/GPUCache/
+/resources/app/Cache/
+/resources/app/Local Storage/
+/resources/app/Preferences
+/resources/app/Cookies-journal
+/resources/app/Cookies
