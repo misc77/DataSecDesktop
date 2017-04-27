@@ -1,0 +1,68 @@
+                    <div id="content">
+                        <div class="row">
+                            <form name="zutrittsmittelForm" novalidate>
+                                <div class="row">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><h4 class="title">{{title}}</h4></td>
+                                                <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="reset()"><i class="material-icons">close</i></a></td>                            
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card blue-grey lighten-5 col s12">
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <i class="material-icons prefix">label</i>
+                                                <input type="text" id="bezeichnung" placeholder="Bezeichnung des Zutrittsmittels" name="bezeichnung" ng-model="formData.bezeichnung" required>
+                                                <label class="active" for="bezeichnung">Bezeichnung:</label>
+                                                <div class="help-block" ng-messages="zutrittsmittelForm.bezeichnung.$error" ng-if="zutrittsmittelForm.bezeichnung.$touched">
+                                                    <p ng-message="required" >Bezeichnung ist ein Pflichtfeld!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">description</i>
+                                            <input type="text" id="beschreibung" placeholder="Beschreibung des Zutrittsmittels" name="bezeichnung" ng-model="formData.beschreibung">
+                                            <label class="active" for="beschreibung">Beschreibung:</label>
+                                        </div>
+                                        <div class="row">
+                                           <div class="input-field col s4">
+                                                <select class="browser-default" 
+                                                        id="status"
+                                                        ng-init="formData._status = { _id: formData.statusID}" 
+                                                        ng-change="formData.statusID = formData.status._id" 
+                                                        ng-model="formData.status" 
+                                                        ng-options="status._id as status.bezeichnung for status in dataservice.statusliste() track by status._id">
+                                                </select>
+                                                <label class="active" for="status" >Status:</label>
+                                            </div>  
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s4">
+                                                <i class="material-icons prefix">date_range</i>
+                                                <input type="date" class="datepicker validate" placeholder="yyyy-mm-dd" id="ausgabe" name="ausgabe" ng-model="formData.ausgabe">
+                                                <label class="active" for="ausgabe">Ausgabe:</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s4">
+                                                <i class="material-icons prefix">date_range</i>
+                                                <input type="date" class="datepicker validate" placeholder="yyyy-mm-dd" name="rueckgabe" id="rueckgabe" ng-model="formData.rueckgabe">
+                                                <label class="active" for="rueckgabe">Rückgabe:</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group col s6">
+                                        <a class="waves-effect waves-light btn" ng-if="!zutrittsmittelForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                        <a class="waves-effect waves-light btn disabled" ng-if="zutrittsmittelForm.$invalid"><i class="material-icons left">save</i>speichern</a>
+                                        <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
+                                    </div>
+                                </div>      
+                            </form>
+                        </div>
+                    </div>

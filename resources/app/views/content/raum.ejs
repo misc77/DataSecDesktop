@@ -1,0 +1,92 @@
+                    <div id="content">
+                        <form name="raumForm" novalidate>
+                            <div class="row">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><h4 class="title">{{title}}</h4></td>
+                                            <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="reset()"><i class="material-icons">close</i></a></td>                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Basis Daten</span>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="input-group col s6">
+                                            <label for="bezeichnung">Bezeichnung:</label>
+                                            <input type="text" id="bezeichnung" placeholder="Bezeichnung der Ressource" name="bezeichnung" ng-model="formData.bezeichnung" required>
+                                            <div class="help-block" ng-messages="raumForm.bezeichnung.$error" ng-if="raumForm.bezeichnung.$touched">
+                                                <p ng-message="required" >Bezeichnung ist ein Pflichtfeld!</p>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="input-group col s4">
+                                            <label for="beschraenkt">Generell beschränkter Zugang:</label>
+                                            <input type="checkbox" id="beschraenkt" name="beschraenkt" ng-model="formData.beschraenkt">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group col s4">
+                                            <label for="zugangvon">Zugang von:</label>
+                                            <input type="date" class="datepicker" placeholder="dd.mm.yyyy hh24:mi" id="zugangvon" name="zugangvon" ng-model="formData.zugangvon">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group col s4">
+                                            <label for="zugangvon">Zugang bis</label>
+                                            <input type="date" class="datepicker" placeholder="dd.mm.yyyy hh24:mi" id="zugangvon" name="zugangbis" ng-model="formData.zugangbis">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Zutrittsmittel</span>
+                                <div class="card-content">
+                                    <div class="input-group">
+                                        <select id="zutrittsmittel"
+                                                class="browser-default"
+                                                name="zutrittsmittel"
+                                                ng-model="formData.zutrittsmittel" 
+                                                ng-options="zutrittsmittel as zutrittsmittel.bezeichnung for zutrittsmittel in dataservice.zutrittsmittelliste() track by zutrittsmittel._id"
+                                                multiple required>
+                                        </select>
+                                        <div class="help-block" ng-messages="raumForm.zutrittsmittel.$error" ng-if="raumForm.zutrittsmittel.$touched">
+                                            <p ng-message="required" >Zutrittsmittel ist ein Pflichtfeld!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Datentypen</span>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="input-group col s6">
+                                            <div class="input-group">
+                                                <select name="datentypen"
+                                                        id="datentypen"
+                                                        class="browser-default"
+                                                        ng-model="formData.daten" 
+                                                        ng-options="data as data.bezeichnung for data in dataservice.daten() track by data._id"
+                                                        multiple required>
+                                                </select>   
+                                                <div class="help-block" ng-messages="raumForm.datentypen.$error" ng-if="raumForm.datentypen.$touched">
+                                                    <p ng-message="required" >Datentypen ist ein Pflichtfeld!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col s6">
+                                    <a class="waves-effect waves-light btn" ng-if="!fahrzeugForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                    <a class="waves-effect waves-light btn disabled" ng-if="fahrzeugForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                    <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+

@@ -1,0 +1,182 @@
+                    <div id="content">
+                        <form name="benutzerForm" novalidate>
+                            <div class="row">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><h4 class="title">{{title}}</h4></td>
+                                            <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="reset()"><i class="material-icons">close</i></a></td>                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Basis Daten</span>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="text" id="benutzername" placeholder="Benutzername" name="name" ng-model="formData.name" required>
+                                            <label class="active" for="benutzername">Benutzername</label>
+                                            <div class="help-block" ng-messages="benutzerForm.name.$error" ng-if="benutzerForm.name.$touched">
+                                                <p ng-message="required" >Benutzername ist ein Pflichtfeld!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="text" id="email" placeholder="E-mail"  name="email" ng-model="formData.email" required>
+                                            <label class="active" for="email">E-mail</label>
+                                            <div class="help-block" ng-messages="benutzerForm.email.$error" ng-if="benutzerForm.email.$touched">
+                                                <p ng-message="required" >E-mail ist ein Pflichtfeld!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s4">
+                                            <select id="rolle" 
+                                                    name="rolle"
+                                                    class="browser-default"
+                                                    ng-init="formData._rolle = { _id: formData.rolleID}" 
+                                                    ng-change="formData.rolleID = formData.rolle._id" 
+                                                    ng-model="formData.rolle" 
+                                                    ng-options="rolle._id as rolle.bezeichnung for rolle in dataservice.rollenliste() track by rolle._id" required>
+                                            </select> 
+                                            <label for="rolle" class="active">Rolle</label>
+                                            <div class="help-block" ng-messages="benutzerForm.rolle.$error" ng-if="benutzerForm.rolle.$touched">
+                                                <p ng-message="required" >Rolle ist ein Pflichtfeld!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="aktiv" name="aktiv" ng-model="formData.aktiv">
+                                            <label for="aktiv">Aktiv</label>
+                                        </div> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="locked" name="locked" ng-model="formData.locked">
+                                            <label for="locked">Gesperrt</label>
+                                        </div> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="admin" name="admin" ng-model="formData.admin">
+                                            <label for="admin">Admin</label>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Zugriffe Hauptfunktionen</span>
+                                <div class="card-content">
+                                    <div class="row"> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="befugnisse" name="befugnisse" ng-model="formData.befugnisse">
+                                            <label for="befugnisse">Befugnisse</label>
+                                        </div> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="auswertungen" name="auswertungen" ng-model="formData.auswertungen">
+                                            <label for="auswertungen">Auswertungen</label>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Zugriffe Stammdaten</span>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="mitarbeiter" name="mitarbeiter" ng-model="formData.mitarbeiter">
+                                            <label for="mitarbeiter">Mitarbeiter</label>
+                                        </div>   
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="musterrolle" name="musterrolle" ng-model="formData.musterrolle">
+                                            <label for="musterrolle">Musterrolle</label>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Zugriffe Basisdaten</span>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="aufgabe" name="aufgabe" ng-model="formData.aufgabe">
+                                            <label for="aufgabe">Aufgabe</label>
+                                        </div>
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="beschaeftigung" name="beschaeftigung" ng-model="formData.beschaeftigung">
+                                            <label for="beschaeftigung">Beschäftigungsverhältnis</label>
+                                        </div>    
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="dokumente" name="dokumente" ng-model="formData.dokumente">
+                                            <label for="dokumente">Dokumente</label>
+                                        </div>
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="fuhrpark" name="fuhrpark" ng-model="formData.fuhrpark">
+                                            <label for="fuhrpark">Fuhrpark</label>
+                                        </div> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="hardware" name="hardware" ng-model="formData.hardware">
+                                            <label for="hardware">IT-Hardware</label>
+                                        </div> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="raum" name="raum" ng-model="formData.raum">
+                                            <label for="raum">Raum</label>
+                                        </div> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="rechte" name="rechte" ng-model="formData.rechte">
+                                            <label for="rechte">Rechte</label>
+                                        </div>
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="ressourcen" name="ressourcen" ng-model="formData.ressourcen">
+                                            <label for="ressourcen">Ressourcen</label>
+                                        </div> 
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="standort" name="standort" ng-model="formData.standort">
+                                            <label for="standort">Standort</label>
+                                        </div>
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="tresor" name="tresor" ng-model="formData.tresor">
+                                            <label for="tresor">Tresor</label>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Zugriffe Hilfsdaten</span>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="reporttyp" name="reporttyp" ng-model="formData.reporttyp">
+                                            <label for="reporttyp">Auswertungstypen</label>
+                                        </div>
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="datentyp" name="datentyp" ng-model="formData.datentyp">
+                                            <label for="datentyp">Datentypen</label>
+                                        </div>
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="ressourcentyp" name="ressourcentyp" ng-model="formData.ressourcentyp">
+                                            <label for="ressourcentyp">Ressourcentypen</label>
+                                        </div>
+                                        <div class="input-group col s4">
+                                            <input type="checkbox" id="zutrittsmittel" name="zutrittsmittel" ng-model="formData.zutrittsmittel">
+                                            <label for="zutrittsmittel">Zutrittsmittel</label>
+                                        </div> 
+                                         <div class="input-group col s4">
+                                            <input type="checkbox" id="mitarbeiterstatus" name="mitarbeiterstatus" ng-model="formData.mitarbeiterstatus">
+                                            <label for="mitarbeiterstatus">Mitarbeiterstatus</label>
+                                        </div> 
+                                         <div class="input-group col s4">
+                                            <input type="checkbox" id="zutrittsmittelstatus" name="zutrittsmittelstatus" ng-model="formData.zutrittsmittelstatus">
+                                            <label for="zutrittsmittelstatus">Zutrittsmittelstatus</label>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col s6">
+                                    <a class="waves-effect waves-light btn" ng-if="!benutzerForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                    <a class="waves-effect waves-light btn disabled" ng-if="benutzerForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                    <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>

@@ -1,0 +1,67 @@
+                    <div id="content">
+                        <div class="row">
+                            <form name="standortForm" novalidate>
+                                <div class="row">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><h4 class="title">{{title}}</h4></td>
+                                                <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="reset()"><i class="material-icons">close</i></a></td>                            
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card blue-grey lighten-5 col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">label</i>
+                                            <input type="text" id="bezeichnung" placeholder="Standortbezeichnung" name="bezeichnung" ng-model="formData.bezeichnung" required>
+                                            <label for="bezeichnung" class="active">Bezeichnung:</label>
+                                            <div class="help-block" ng-messages="standortForm.bezeichnung.$error" ng-if="standortForm.bezeichnung.$touched">
+                                                <p ng-message="required" >Bezeichnung ist ein Pflichtfeld!</p>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">description</i>
+                                        <input type="text" id="land" placeholder="Land" name="land" ng-model="formData.land" required>
+                                        <label for="land" class="active">Land</label>
+                                        <div class="help-block" ng-messages="standortForm.land.$error" ng-if="standortForm.land.$touched">
+                                            <p ng-message="required" >Land ist ein Pflichtfeld!</p>
+                                        </div>  
+                                    </div>  
+                                    <div class="input-field col s12">
+                                        <p></p>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input type="checkbox" id="hauptstandort" name="hauptstandort" ng-model="formData.hauptstandort">
+                                        <label class="active" for="hauptstandort">Hauptstandort</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s4">
+                                            <i class="material-icons prefix">date_range</i>
+                                            <input type="date" class="datepicker validate" placeholder="dd.mm.yyyy" id="gruendung" name="gruendung" ng-model="formData.gruendung" required>
+                                            <label class="active" for="gruendung">Gründung</label>
+                                            <div class="help-block" ng-messages="standortForm.gruendung.$error" ng-if="standortForm.gruendung.$touched">
+                                                <p ng-message="required" >Gründung ist ein Pflichtfeld!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s4">
+                                            <i class="material-icons prefix">date_range</i>
+                                            <input type="date" class="datepicker validate" placeholder="dd.mm.yyyy" name="schliessung" id="schliessung" ng-model="formData.schliessung">
+                                            <label class="active" for="schliessung">Schließung</label>
+                                        </div>
+                                    </div>                                  
+                                </div>
+                                <div class="row">
+                                    <div class="input-group col s6">
+                                        <a class="waves-effect waves-light btn" ng-if="!standortForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                        <a class="waves-effect waves-light btn disabled" ng-if="standortForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                        <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>

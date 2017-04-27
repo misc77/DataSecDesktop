@@ -1,0 +1,52 @@
+                    <div id="content">
+                        <div class="row">
+                            <form name="mitarbeiterstatusForm" novalidate>
+                                <div class="row">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><h4 class="title">{{title}}</h4></td>
+                                                <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="reset()"><i class="material-icons">close</i></a></td>                            
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card blue-grey lighten-5 col s12">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">label</i>
+                                            <input type="text" id="bezeichnung" placeholder="Bezeichnung des Status" name="bezeichnung" ng-model="formData.bezeichnung" required>
+                                            <label class="active" for="bezeichnung">Bezeichnung:</label>
+                                            <div class="help-block" ng-messages="mitarbeiterstatusForm.bezeichnung.$error" ng-if="mitarbeiterstatusForm.bezeichnung.$touched">
+                                                <p ng-message="required" >Bezeichnung ist ein Pflichtfeld!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">description</i>
+                                        <input type="text" id="beschreibung" placeholder="Beschreibung des Status" name="bezeichnung" ng-model="formData.beschreibung">
+                                        <label class="active" for="beschreibung">Beschreibung:</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <br/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s4">
+                                            <i class="material-icons prefix">priority_high</i>
+                                            <input type="checkbox" name="aktiv" id="aktiv" ng-model="formData.aktiv_status">
+                                            <label for="aktiv" class="active">Aktiv</label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="input-group col s6">
+                                        <a class="waves-effect waves-light btn" ng-if="!mitarbeiterstatusForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                        <a class="waves-effect waves-light btn disabled" ng-if="mitarbeiterstatusForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
+                                        <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
