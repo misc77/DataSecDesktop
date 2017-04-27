@@ -5,8 +5,7 @@
   "scripts": {
     "start": "electron resources/app",
     "pack": "build --dir",
-    "dist": "build",
-    "postinstall": "install-app-deps"
+    "dist": "build"
   },
   "dependencies": {
     "asar": "^0.13.0",
