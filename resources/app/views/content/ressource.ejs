@@ -15,7 +15,7 @@
                                     <span class="card-title">Hauptdaten</span>
                                     <div class="card-content">
                                         <div class="row">
-                                            <div class="input-field col s6">
+                                            <div class="input-field col s12">
                                                 <i class="material-icons prefix">label</i>
                                                 <input type="text" id="bezeichnung" placeholder="Bezeichnung der Ressource" name="bezeichnung" ng-model="formData.bezeichnung" required>
                                                 <label class="active" for="bezeichnung">Bezeichnung:</label>
@@ -24,43 +24,52 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="input-field col s12">
-                                            <i class="material-icons prefix">description</i>
-                                            <input type="text" id="beschreibung" placeholder="Beschreibung der Ressource" name="bezeichnung" ng-model="formData.beschreibung">
-                                            <label class="active" for="beschreibung">Beschreibung:</label>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">description</i>
+                                                <input type="text" id="beschreibung" placeholder="Beschreibung der Ressource" name="beschreibung" ng-model="formData.beschreibung">
+                                                <label class="active" for="beschreibung">Beschreibung:</label>
+                                            </div>
                                         </div>
-                                        <div class="input-field col s12">
-                                            <i class="material-icons prefix">description</i>
-                                            <input type="text" placeholder="Verwendungszweck" id="verwendungszweck" name="verwendungszweck" ng-model="formData.verwendungszweck">
-                                            <label for="verwendungszweck">Verwendungszweck:</label>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">description</i>
+                                                <input type="text" placeholder="Verwendungszweck" id="verwendungszweck" name="verwendungszweck" ng-model="formData.verwendungszweck">
+                                                <label for="verwendungszweck">Verwendungszweck:</label>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">view_list</i>
+                                                <input type="text" id="inventarNr" placeholder="Inventarnummer" name="inventarNr" ng-model="formData.inventarNr">
                                                 <label for="inventarNr">Inventar Nummer:</label>
-                                                <input type="text" id="beschreibung" placeholder="Inventarnummer" name="inventarNr" ng-model="formData.inventarNr">
                                             </div>
                                         </div>
-                                        <div class="input-field col s12">
-                                            <i class="material-icons prefix">terrain</i>
-                                            <input type="text" id="beschreibung" placeholder="Land wo sich die Ressource befindet" name="land" ng-model="formData.land">
-                                            <label class="active" for="land">Land:</label>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">terrain</i>
+                                                <input type="text" id="land" placeholder="Land in dem sich die Ressource befindet" name="land" ng-model="formData.land">
+                                                <label class="active" for="land">Land:</label>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">phonelink_setup</i>
-                                                <input type="checkbox" id="mobiledevmgmt" name="mobiledevmgmt" ng-model="formData.mobiledevmgmt">
+                                                <input type="checkbox" class="filled-in" id="mobiledevmgmt" name="mobiledevmgmt" ng-model="formData.mobiledevmgmt">
                                                 <label for="mobiledevmgmt">Mobile Device Management:</label>
                                             </div>     
                                         </div>
-                                        <div class="input-field col s6 offset-s1">
-                                            <select class="browser-default" id="standort" name="typ" ng-model="formData.typ" ng-options="typ as typ.bezeichnung for typ in dataservice.ressourcentypliste() track by typ._id" required material-select="" watch="">
-                                                    <option value="" disabled="" selected="">Bitte Typ der Ressource wählen</option>
-                                            </select>
-                                            <div class="help-block" ng-messages="mitarbeiterForm.standort.$error" ng-if="ressourceForm.typ.$touched">
-                                                <p ng-message="required">Typ ist ein Pflichtfeld!</p>
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <i class="material-icons prefix">folder</i>
+                                                <select id="typ" name="typ" ng-model="formData.typ" ng-options="typ as typ.bezeichnung for typ in dataservice.ressourcentypliste() track by typ._id" required material-select="" watch="">
+                                                        <option value="" disabled="" selected="">Bitte Typ der Ressource wählen</option>
+                                                </select>
+                                                <div class="help-block" ng-messages="ressourceForm.standort.$error" ng-if="ressourceForm.typ.$touched">
+                                                    <p ng-message="required">Typ ist ein Pflichtfeld!</p>
+                                                </div>
+                                                <label for="typ">Typ</label>
                                             </div>
-                                            <label class="active">Typ</label>
                                         </div>
                                     </div>
                                 </div>
@@ -68,20 +77,15 @@
                                 <div class="card blue-grey lighten-5 col s12">
                                     <span class="card-title">Datenarten</span>
                                     <div class="card-content">
-                                        <div class="input-group">
-                                            <div class="input-field" ng-repeat="data in formData.daten">                             
-                                                <select class="browser-default col s5"
-                                                    ng-init="formData._daten = { _id: formData.datenID}"
-                                                    ng-change="formData.datenID = formData.daten._id" 
-                                                    ng-model="data" 
-                                                    ng-options="daten._id as daten.bezeichnung for daten in dataservice.daten() track by daten._id">
-                                                </select>
-                                                <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.daten, daten)"><i class="material-icons">remove</i></a>
-                                            </div> 
+                                        <div class="input-field col s12">
+                                            <select id="datenarten"
+                                                    name="datenarten"
+                                                    ng-model="formData.daten" 
+                                                    ng-options="daten as daten.bezeichnung for daten in dataservice.daten() track by daten._id"
+                                                    multiple required>
+                                                <option disabled selected>Wähle eine Option</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="card-action">
-                                        <a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.daten, {})"><i class="material-icons">add</i></a>
                                     </div>
                                 </div>
 
@@ -97,8 +101,8 @@
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <i class="material-icons prefix">priority_high</i>
-                                            <input type="checkbox" name="aktiv" id="aktiv" ng-model="formData.aktiv">
-                                            <label for="aktiv" class="active">Aktiv</label>
+                                            <input type="checkbox" class="filled-in" name="aktiv" id="aktiv" ng-model="formData.aktiv">
+                                            <label for="aktiv" >Aktiv</label>
                                         </div>
                                     </div>     
                                 </div>
@@ -109,7 +113,12 @@
                                         <a class="waves-effect waves-light btn disabled" ng-if="ressourceForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
                                         <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
                                     </div>
-                                </div>                               
+                                </div>   
+                                <script>
+                                    $(document).ready(function() {
+                                        $('select').material_select();
+                                    });
+                                </script>
                             </form>
                         </div>
                     </div>

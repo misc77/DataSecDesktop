@@ -1,8 +1,8 @@
-                <div id="nav" class="card-panel blue-grey lighten-5" ng-if="appdata.user !== undefined">
+                <div id="nav" class="card-panel blue-grey lighten-5 ng-cloak" ng-if="appdata.user !== undefined">
                     <div><h4>Menü<h4></div>
                     <ul class="collapsible" data-collapsible="expandable">
                         <li>
-                            <div class="collapsible-header blue-grey lighten-4 active"><i class="material-icons left-align">dashboard</i>Berechtigungsverwaltung</div>
+                            <div class="collapsible-header blue-grey lighten-4 active"><i class="material-icons left-align">dashboard</i>Berechtigungen</div>
                             <div class="collapsible-body">
                                 <div class="collection blue-grey lighten-5">
                                     <div ng-if="appdata.user.musterrolle"><a class="collection-item" ng-click="call_submenu('musterrolle')"><i class="material-icons left-align">people_outline</i>Muster Rollen</a></div>
@@ -21,7 +21,6 @@
                                     <div ng-if="appdata.user.tresor" ><a class="collection-item" ng-click="call_submenu('tresor')">Tresor</a></div>                       
                                     <div ng-if="appdata.user.zutrittsmittel"><a class="collection-item" ng-click="call_submenu('zutrittsmittel')">Zutrittsmittel</a></div>
                                     <div ng-if="appdata.user.zutrittsmittelmatrix"><a class="collection-item" ng-click="call_submenu('zutrittsmittelmatrix')">Zutrittsmittel Zuordnung</a></div>
-                                    <!--div ng-if="appdata.user.hardware"><a class="collection-item" ng-click="call_submenu('hardware')">IT-Hardware</a></div-->
                                     <div ng-if="appdata.user.ressourcen"><a class="collection-item" ng-click="call_submenu('ressourcen')">Ressourcen</a></div>
                                     <div ng-if="appdata.user.fuhrpark"><a class="collection-item" ng-click="call_submenu('fahrzeug')">Fuhrpark</a></div>
                                 </div>
@@ -35,7 +34,6 @@
                                     <div ng-if="appdata.user.beschaeftigung"><a class="collection-item" ng-click="call_submenu('beschaeftigung')">Beschäftigungsverhältnis</a></div>
                                     <div ng-if="appdata.user.dokumente"><a class="collection-item" ng-click="call_submenu('dokumente')">Musterdokumente</a></div>
                                     <div ng-if="appdata.user.rechte"><a class="collection-item" ng-click="call_submenu('rechte')">Rechte</a></div>
-                                    <div ng-if="appdata.user.standort"><a class="collection-item" ng-click="call_submenu('standort')">Standort</a></div>
                                     <div ng-if="appdata.user.reporttyp"><a class="collection-item" ng-click="call_submenu('reporttyp')">Auswertungsarten</a></div>
                                     <div ng-if="appdata.user.datentyp"><a class="collection-item" ng-click="call_submenu('daten')">Datenarten</a></div>
                                     <div ng-if="appdata.user.ressourcentyp"><a class="collection-item" ng-click="call_submenu('ressourcentyp')">Ressourcenarten</a></div>

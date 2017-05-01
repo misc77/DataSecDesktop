@@ -13,7 +13,7 @@
                                 </div>
                                 <div class="card blue-grey lighten-5 col s12">
                                     <div class="row">
-                                        <div class="input-field col s6">
+                                        <div class="input-field col s12">
                                             <i class="material-icons prefix">label</i>
                                             <input type="text" id="bezeichnung" placeholder="Standortbezeichnung" name="bezeichnung" ng-model="formData.bezeichnung" required>
                                             <label for="bezeichnung" class="active">Bezeichnung:</label>
@@ -38,7 +38,7 @@
                                         <label class="active" for="hauptstandort">Hauptstandort</label>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s4">
+                                        <div class="input-field col s6">
                                             <i class="material-icons prefix">date_range</i>
                                             <input type="date" class="datepicker validate" placeholder="dd.mm.yyyy" id="gruendung" name="gruendung" ng-model="formData.gruendung" required>
                                             <label class="active" for="gruendung">Gründung</label>
@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s4">
+                                        <div class="input-field col s6">
                                             <i class="material-icons prefix">date_range</i>
                                             <input type="date" class="datepicker validate" placeholder="dd.mm.yyyy" name="schliessung" id="schliessung" ng-model="formData.schliessung">
                                             <label class="active" for="schliessung">Schließung</label>
@@ -56,7 +56,7 @@
                                     </div>                                  
                                 </div>
                                 <div class="row">
-                                    <div class="input-group col s6">
+                                    <div class="input-group col s12">
                                         <a class="waves-effect waves-light btn" ng-if="!standortForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
                                         <a class="waves-effect waves-light btn disabled" ng-if="standortForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
                                         <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>

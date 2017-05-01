@@ -23,15 +23,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="input-field col s12">
-                                            <i class="material-icons prefix">description</i>
-                                            <input type="text" id="beschreibung" placeholder="Beschreibung des Zutrittsmittels" name="bezeichnung" ng-model="formData.beschreibung">
-                                            <label class="active" for="beschreibung">Beschreibung:</label>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">description</i>
+                                                <input type="text" id="beschreibung" placeholder="Beschreibung des Zutrittsmittels" name="bezeichnung" ng-model="formData.beschreibung">
+                                                <label class="active" for="beschreibung">Beschreibung:</label>
+                                            </div>
                                         </div>
                                         <div class="row">
-                                           <div class="input-field col s4">
-                                                <select class="browser-default" 
-                                                        id="status"
+                                           <div class="input-field col s6">
+                                                <i class="material-icons prefix">info</i>
+                                                <select id="status"
+                                                        name="status"
                                                         ng-init="formData._status = { _id: formData.statusID}" 
                                                         ng-change="formData.statusID = formData.status._id" 
                                                         ng-model="formData.status" 
@@ -41,14 +44,14 @@
                                             </div>  
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s4">
+                                            <div class="input-field col s6">
                                                 <i class="material-icons prefix">date_range</i>
                                                 <input type="date" class="datepicker validate" placeholder="yyyy-mm-dd" id="ausgabe" name="ausgabe" ng-model="formData.ausgabe">
                                                 <label class="active" for="ausgabe">Ausgabe:</label>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s4">
+                                            <div class="input-field col s6">
                                                 <i class="material-icons prefix">date_range</i>
                                                 <input type="date" class="datepicker validate" placeholder="yyyy-mm-dd" name="rueckgabe" id="rueckgabe" ng-model="formData.rueckgabe">
                                                 <label class="active" for="rueckgabe">Rückgabe:</label>
@@ -62,7 +65,12 @@
                                         <a class="waves-effect waves-light btn disabled" ng-if="zutrittsmittelForm.$invalid"><i class="material-icons left">save</i>speichern</a>
                                         <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
                                     </div>
-                                </div>      
+                                </div> 
+                                <script>
+                                    $(document).ready(function() {
+                                        $('select').material_select();
+                                    });
+                                </script>
                             </form>
                         </div>
                     </div>

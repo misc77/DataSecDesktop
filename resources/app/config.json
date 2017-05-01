@@ -1,6 +1,8 @@
 {
 	"db_path": "C:/Data/db",
+	"db_uri": "mongodb://localhost:27017/DataSec",
 	"icon_path": "/assets/img/icon.png",
+	"cookie_age": 1000,
 	"window_zoom": 0.75,
 	"window_width": 1280,
 	"window_height": 830

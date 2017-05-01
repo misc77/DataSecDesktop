@@ -25,7 +25,7 @@ gulp.task('run', function () {
   childProcess.spawn(electron, ['./resources/app'], { stdio: 'inherit' }); 
 });
 
-//gulp.task('start_db', shell.task(['mongod -dbpath "C:/Data/db"']));
+gulp.task('start_db', shell.task(['mongod -dbpath "C:/Data/db"']));
     
 gulp.task('release', function() {
     gulp.src("")

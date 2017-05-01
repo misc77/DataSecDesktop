@@ -14,7 +14,7 @@
                                 <div class="card-content">
                                     <div class="row">
                                         <div class="input-group">
-                                            <div class="input-field col s6">
+                                            <div class="input-field col s12">
                                                 <i class="material-icons prefix">label</i>
                                                 <input type="text" id="bezeichnung" name="bezeichnung" ng-model="formData.bezeichnung" required class="validate">
                                                 <label class="active" for="bezeichnung">Bezeichnung</label>
@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-group">
-                                            <div class="input-field col s6">
+                                            <div class="input-field col s12">
                                                 <i class="material-icons prefix">description</i>
                                                 <input type="text" id="beschreibung" name="beschreibung" ng-model="formData.beschreibung">
                                                 <label class="active" for="beschreibung">Beschreibung</label>     
@@ -35,9 +35,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-group">
-                                            <div class="input-field col s4">
-                                                <select class="browser-default"
-                                                        ng-model="formData.daten" 
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">recent_actors</i>
+                                                <select ng-model="formData.daten" 
                                                         name="datentypen"
                                                         id="datentypen"
                                                         ng-options="data as data.bezeichnung for data in dataservice.daten() track by data._id"
@@ -52,19 +52,24 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-group col s4">
-                                            <input type="checkbox" id="aktiv" name="aktiv" ng-model="formData.aktiv">
+                                            <input type="checkbox" class="filled-in" id="aktiv" name="aktiv" ng-model="formData.aktiv">
                                             <label for="aktiv">Aktiv:</label>
                                         </div> 
                                     </div>
                                 </div>
                             </div>                        
                             <div class="row">
-                                <div class="input-group col s6">
+                                <div class="input-group col s12">
                                     <a class="waves-effect waves-light btn" ng-if="!tresorForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
                                     <a class="waves-effect waves-light btn disabled" ng-if="tresorForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>
                                     <a class="waves-effect waves-light btn" ng-click="reset()"><i class="material-icons left">cancel</i>schliessen</a>
                                 </div>
                             </div>
+                            <script>
+                                $(document).ready(function() {
+                                    $('select').material_select();
+                                });
+                            </script>
                         </form>
                     </div>
 

@@ -8,3 +8,11 @@
 /resources/app/Preferences
 /resources/app/Cookies-journal
 /resources/app/Cookies
+/nbproject/private/
+/resources/app/databases/Databases.db
+/resources/app/databases/Databases.db-journal
+/resources/app/databases/
+/resources/app/IndexedDB/
+/resources/app/File System/
+/resources/app/QuotaManager
+/resources/app/QuotaManager-journal
