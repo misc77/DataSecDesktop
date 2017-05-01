@@ -26,7 +26,11 @@ gulp.task('run', function () {
 });
 
 gulp.task('start_db', shell.task(['mongod -dbpath "C:/Data/db"']));
-    
+  
+gulp.task('db_dump', shell.task(['mongodump --host localhost:27017 --db DataSec --out "C:\Users\misc2\Documents\NetBeansProjects\DataSecDesktop\resources\app\database\data\dump"']));
+
+gulp.task('db_restore', shell.task(['mongorestore --host localhost:27017 --db DataSec "C:\Users\misc2\Documents\NetBeansProjects\DataSecDesktop\resources\app\database\data\dump"']));
+
 gulp.task('release', function() {
     gulp.src("")
     .pipe(gulp_electron({
