@@ -133,17 +133,13 @@ app.factory("DataService", function($http){
 
 app.filter('filterList', function (){
     return function(list, formData, selected) {
-        console.log('in filter');
-        console.log('list: ' + JSON.stringify(list));
-        console.log('formdata: ' + JSON.stringify(formData));
         var filteredList = [];        
         
         if (formData !== undefined && formData.length > 0) {
             for ( var index in list ){
                 var element = list[index];
                 var inFormData = false;
-                
-                console.log('element_id: ' + element._id );
+
                 for ( var index2 in formData ){
                     var data = formData[index2];
                     if (data._id === element._id) {
@@ -156,13 +152,11 @@ app.filter('filterList', function (){
             }
         }
         else {
-            console.log('in else');
             filteredList = list;
         }
         if (selected !== undefined) {
             filteredList.push(selected);
         }
-//        return true;
          return filteredList;
     };
 });
