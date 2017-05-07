@@ -3,25 +3,75 @@
     <head>
         <title>User Login and Sessions Signup</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/static/css/styles.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.js"></script>
-        <script src="../static/js/datasec.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="./css/materialize.css">
+        <link href="./css/styles.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <div class="form-container" ng-controller="DataSecController">
-            <p class="form-header">Sign Up</p>
-            <form method="POST" >
-                <label>Username:</label>
-                <input type="text" name="username" ng-model="formData.username"><br>
-                <label>Password:</label>
-                <input type="password" name="password" ng-model="formData.password"><br>
-                <label>Email:</label>
-                <input type="email" name="email" ng-model="formData.email"><br>
-                <input type="button" value="Register" ng-click="signup()">
-            </form>
+    <body ng-app="datasec" ng-controller="DataSecController">
+        <nav>
+            <div class="nav-wrapper indigo netvocat">
+                <img src="./img/logo.jpg" alt="logo"/><a href="#" class="brand-logo" >DataSec - Berechtigungskonzept</a>
+                <ul id="nav-mobile" class="right hide-on-small-and-down">
+                        <li><a href="/signup" class="btn-floating btn-large waves-effect waves-light deep-orange darken-4"><i class="material-icons">person_add</i></a></li>
+                    </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <div id="nav" class="col s2 white"></div>
+            <div class="col s6 m6 valign-wrapper">
+                <div id="login" class="card z-depth-1 grey lighten-4 row hoverable">
+                    <form name="signupForm" method="POST"> 
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input type="text" id="username" name="username" ng-model="formData.username" required class="validate">
+                                <label class="active" for="username">Benutzername</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input type="password" id="password" ng-model="formData.password" name="password" required class="validate">
+                                <label class="active" for="password">Passwort</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">mail</i>
+                                <input type="email" id="email" name="email" ng-model="formData.email" required class="validate">
+                                <label class="active" for="email">E-Mail</label>
+                            </div>
+                        </div>
+                        <center>
+                            <div class='row'>
+                                <button ng-if="!signupForm.$invalid" type='button' name='register' class='col s12 btn btn-large waves-effect indigo netvocat' ng-click="signup()">Registrieren</button>
+                                <button ng-if="signupForm.$invalid"  type='button' name='register' class='col s12 btn btn-large waves-effect indigo netvocat disabled'>Registrieren</button>
+                            </div>
+                        </center>
+                    </form>
+                </div>
+            </div> 
         </div>
-        <hr>
-        <span ng-bind-html="message"></span>
+         <footer class="page-footer indigo netvocat">
+            <div class="container">
+                <div class="row">
+                    <div class="col s3">
+                        <h5 class="white-text left-align">Message:</h5>
+                    </div>
+                    <div class="col s9">
+                        <p class="grey-text text-lighten-4 left-align">{{appdata.msg}}</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" src="./jquery/dist/jquery.js" onload="window.$ = window.jQuery = module.exports;"></script>
+        <script type="text/javascript" src="./hammerjs/hammer.js"></script>
+        <script type="text/javascript" src="./materialize/materialize.js"></script>
+        <script type="text/javascript" src="./js/angular.js"></script>
+        <script type="text/javascript" src="./js/angular-route.js"></script>
+        <script type="text/javascript" src="./js/angular-messages.js"></script>
+        <script type="text/javascript" src="./js/datasec.js"></script>
+        <script type="text/javascript" src="./js/misc.js"></script> 
     </body>
 </html>

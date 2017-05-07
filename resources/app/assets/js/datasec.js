@@ -194,7 +194,7 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                             // init data
                             $scope.dataservice.init();
                         }
-                    , //error
+                        , //error
                         function () {
                            alert('Probleme bei der Benutzerauthorisierung!');
                         });
@@ -402,22 +402,50 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
         },
 
         $scope.signup = function(){
-            $http.post('/signup', $scope.formData).then( 
+            $http.get('/api/benutzer/exists',{params: { name : $scope.formData.username }}).then(
                 //success
-                function(data, status, headers, config){
-                    appdata.msg = 'User registriert!';
-                    $scope.reset();
-                }, 
-                //error
-                function(data, status, headers, config){
-                    alert("Fehler beim Registrieren: " + data);
-                }); 
+                function (res) { 
+                    $log.debug('data: ' + JSON.stringify(res.data.userExists));
+                   if (res.data.userExists) {
+                       alert('Username ist bereits vergeben!');
+                   } else {
+                        $http.post('/signup', $scope.formData).then( 
+                        //success
+                        function(data, status, headers, config){
+                            appdata.msg = 'User registriert!';
+                            $scope.reset();
+                        }, 
+                        //error
+                        function(data, status, headers, config){
+                            alert("Fehler beim Registrieren: " + res);
+                        }); 
+                   }
+                }, //error
+                function () {
+                   alert('Probleme bei der Prüfung des Benutzernamens!');
+                });
         };
         
         //Log out user and kill session
         $scope.logout = function(){
             appdata.object = undefined;
             $http.get('/logout').then( 
+                //success
+                function(data, status, headers, config){
+                    appdata.msg = 'Erfolgreich abgemeldet!';
+                    $window.location.reload();                    
+                }, 
+                //error
+                function(data, status, headers, config){
+                    appdata.msg = 'Fehler beim Abmelden: '+ data;
+//                    Materialize.toast(appdata.msg, $scope.dataservice.message_time);
+                }); 
+        };
+        
+        //Log out user and kill session
+        $scope.login = function(){
+            appdata.object = undefined;
+            $http.post('/login', $scope.formData).then( 
                 //success
                 function(data, status, headers, config){
                     appdata.msg = 'Erfolgreich abgemeldet!';

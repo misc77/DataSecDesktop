@@ -220,7 +220,13 @@ exports.signup = function(req, res){
             console.log('err: ' + err);
             res.redirect(user, '/signup');
         } else {
-            res.redirect(user, '/');
+            req.session.regenerate(function(){
+                req.session.user = user.id;
+                req.session.username = user.name;
+                req.session.msg = 'Logged in as ' + user.name;
+                console.log('user. ' + JSON.stringify(user));
+                res.redirect('/signup');
+            });
         }
     });
 };
@@ -229,9 +235,10 @@ exports.signup = function(req, res){
  * Login
  */
 exports.login = function(req, res){
-    console.log('in login... username: ' + req.body.username);
+    console.log('in login... username: ' + req.body.username + ' ' + JSON.stringify(req.body));
     User.findOne({name: req.body.username})
             .exec(function(err, user, path){
+                err = null;
                 if(user === undefined | user === null){
                      err = 'User Not Found!';
                      path = '/notfound';
@@ -248,7 +255,7 @@ exports.login = function(req, res){
                             req.session.username = user.name;
                             req.session.msg = 'Logged in as ' + user.name;
                             console.log('user. ' + JSON.stringify(user));
-                            res.redirect('/');
+                            res.redirect('/home');
                         });
                     }
                 } else {
@@ -256,8 +263,8 @@ exports.login = function(req, res){
                     path = '/failed';
                 }
                 
-                if(err){
-                    console.log('error: ' + err + ' path');
+                if(err !== null && path !== undefined){
+                    console.log('error: ' + err + ' path: ' + path);
                     res.redirect(path);
                 }
     });
@@ -372,6 +379,25 @@ exports.get = function(req, res){
             });
         } else {
             res.json({object : user});
+        }
+    });
+};
+
+exports.exists = function(req, res){
+    console.log('check user: ' + req.query['name']);
+    User.count({name: req.query['name']})
+            .exec(function(err, result) {
+        if (err) {
+            console.log('err: ' + err);
+            return res.status(400).send({
+                msg: err.getErrorMessage(err)
+            });
+        } else {
+            var exists = false;
+            if (result !== undefined && result !== null && result > 0 ){
+                exists = true;
+            }
+            res.json({userExists : exists});
         }
     });
 };

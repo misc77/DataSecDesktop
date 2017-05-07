@@ -249,6 +249,7 @@ module.exports = function(app) {
      ***************************/
     app.get('/api/benutzer/list',        user.list);
     app.get('/api/benutzer/get',         user.get);
+    app.get('/api/benutzer/exists',      user.exists);
     app.post('/api/benutzer/save',       user.save);
     app.post('/api/benutzer/delete',     user.delete);
     app.post('/api/benutzer/create',     user.create);
@@ -258,7 +259,7 @@ module.exports = function(app) {
        if(req.session.user){
            res.json(req.session.user);                    
        } else {
-           res.json(404, {err: 'User Not Found!'});
+           //res.json(404, {err: 'User Not Found!'});
        }
     });
     
@@ -269,20 +270,27 @@ module.exports = function(app) {
         }else {
             user.checkIsInit(req, res);
         }
-    });    
+    });
+    app.get('/home', function(req, res){
+        if(req.session.user) {
+            res.render('index', { username: req.session.username, msg:req.session.msg, submenu:req.session.submenu } );
+        }else {
+            res.redirect(401, '/login');
+        }
+    });
     //modify user
     app.get('/user', function(req, res){
         console.log("user...");
         if(req.session.user){
             res.render('user');
         } else {
-            res.redirect('/login', {message: 'Access denied!'});
+            res.redirect(401, '/login', {message: 'Access denied!'});
         }
     });    
     //signup
     app.get('/signup', function(req, res){
         if(req.session.user){
-            res.redirect('/', { username: req.session.user.name});
+            res.redirect('/home', { username: req.session.user.name});
         } 
         res.render('signup');
     });
@@ -290,9 +298,10 @@ module.exports = function(app) {
     app.get('/login', function(req, res){
         console.log("login...");
         if(req.session.user){
-            res.redirect('/', { username: req.session.user.name, msg: req.session.msg});
+            res.redirect(200, '/home', { username: req.session.user.name, msg: req.session.msg});
+        }else{
+            res.render('login', {msg: req.session.msg});
         }
-        res.render('login', {msg: req.session.msg});
     });
     app.get('/locked', function(req, res){
         res.render('locked');
