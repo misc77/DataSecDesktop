@@ -11,6 +11,7 @@
                                 </table>
                             </div>
                             <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Basisdaten</span>
                                 <div class="card-content">
                                     <div class="row">
                                         <div class="input-group">
@@ -34,30 +35,34 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-group">
-                                            <div class="input-field col s12">
-                                                <i class="material-icons prefix">recent_actors</i>
-                                                <select ng-model="formData.daten" 
-                                                        name="datentypen"
-                                                        id="datentypen"
-                                                        ng-options="data as data.bezeichnung for data in dataservice.daten() track by data._id"
-                                                        multiple required>
-                                                </select>
-                                                <label class="active" for="datentypen">Datentypen</label>  
-                                                <div class="help-block" ng-messages="tresorForm.datentypen.$error" ng-if="tresorForm.datentypen.$touched">
-                                                    <p ng-message="required" >Datentyp ist ein Pflichtfeld!</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="input-group col s4">
                                             <input type="checkbox" class="filled-in" id="aktiv" name="aktiv" ng-model="formData.aktiv">
                                             <label for="aktiv">Aktiv:</label>
                                         </div> 
                                     </div>
                                 </div>
-                            </div>                        
+                            </div>     
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Datenarten</span>
+                                <div class="card-content">
+                                    <div class="row" ng-repeat="data in formData.daten">                             
+                                        <select class="col s8" material-select watch 
+                                            id="{{ 'datentyp' + $index }}"
+                                            ng-init="data._data = { _id: data._id}" 
+                                            ng-change="data._id = data._data._id" 
+                                            ng-model="data._data" 
+                                            ng-options="datum as datum.bezeichnung for datum in dataservice.daten() | filterList:formData.daten:data track by datum._id"
+                                            ng-if="formData">
+                                            <option value ="" disabled selected>Wähle einen Datenart</option>
+                                        </select>
+                                        <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.daten, data)"><i class="material-icons">remove</i></a>
+                                        <script> $(document).ready(function() { $('select').material_select(); });</script>
+                                    </div>
+                                    <div class="row">
+                                        <a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.daten, {})"><i class="material-icons">add</i></a>
+                                    </div>
+                                 </div>
+                            </div>
                             <div class="row">
                                 <div class="input-group col s12">
                                     <a class="waves-effect waves-light btn" ng-if="!tresorForm.$invalid" ng-click="save()"><i class="material-icons left">save</i>speichern</a>

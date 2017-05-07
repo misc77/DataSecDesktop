@@ -45,44 +45,44 @@
                             <div class="card blue-grey lighten-5 col s12">
                                 <span class="card-title">Zutrittsmittel</span>
                                 <div class="card-content">
-                                    <div class="input-field" ng-repeat="zutrittsmittel in formData.zutrittsmittel">                             
+                                    <div class="row" ng-repeat="zutrittsmittel in formData.zutrittsmittel">                             
                                         <select class="col s8" material-select watch 
                                             id="{{ 'zutrittsmittel' + $index }}"
                                             ng-init="zutrittsmittel._data = { _id: zutrittsmittel._id}" 
                                             ng-change="zutrittsmittel._id = zutrittsmittel._data._id" 
                                             ng-model="zutrittsmittel._data" 
-                                            ng-options="zm as zm.bezeichnung for zm in dataservice.zutrittsmittelliste() track by zm._id"
+                                            ng-options="zm as zm.bezeichnung for zm in dataservice.zutrittsmittelliste() | filterList:formData.zutrittsmittel:zutrittsmittel track by zm._id"
                                             ng-if="formData">
                                             <option value ="" disabled>Wähle ein Zutrittsmittel</option>
                                         </select>
                                         <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.zutrittsmittel, zutrittsmittel)"><i class="material-icons">remove</i></a>
                                         <script> $(document).ready(function() { $('select').material_select(); });</script>
                                     </div>
-                                </div>
-                                <div class="card-action">
-                                    <a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.zutrittsmittel, {})"><i class="material-icons">add</i></a>
+                                    <div class="row">
+                                        <a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.zutrittsmittel, {})"><i class="material-icons">add</i></a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card blue-grey lighten-5 col s12">
-                                <span class="card-title">Datentypen</span>
+                                <span class="card-title">Datenarten</span>
                                 <div class="card-content">
-                                    <div class="input-field" ng-repeat="data in formData.daten">                             
+                                    <div class="row" ng-repeat="data in formData.daten">                             
                                         <select class="col s8" material-select watch 
                                             id="{{ 'datentyp' + $index }}"
                                             ng-init="data._data = { _id: data._id}" 
                                             ng-change="data._id = data._data._id" 
                                             ng-model="data._data" 
-                                            ng-options="datum as datum.bezeichnung for datum in dataservice.daten() track by datum._id "
+                                            ng-options="datum as datum.bezeichnung for datum in dataservice.daten() | filterList:formData.daten:data track by datum._id "
                                             ng-if="formData">
-                                            <option value ="" disabled>Wähle einen Datentyp</option>
+                                            <option value ="" disabled>Wähle einen Datenart</option>
                                         </select>
                                         <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.daten, data)"><i class="material-icons">remove</i></a>
                                         <script> $(document).ready(function() { $('select').material_select(); });</script>
                                     </div>
-                                </div>
-                                <div class="card-action">
-                                    <a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.daten, {})"><i class="material-icons">add</i></a>
-                                </div>
+                                    <div class="row">
+                                        <a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.daten, {})"><i class="material-icons">add</i></a>
+                                    </div>
+                                </div>                                
                             </div>
                             <div class="row">
                                 <div class="input-group col s12">

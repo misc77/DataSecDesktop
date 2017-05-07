@@ -131,6 +131,42 @@ app.factory("DataService", function($http){
     };
 });
 
+app.filter('filterList', function (){
+    return function(list, formData, selected) {
+        console.log('in filter');
+        console.log('list: ' + JSON.stringify(list));
+        console.log('formdata: ' + JSON.stringify(formData));
+        var filteredList = [];        
+        
+        if (formData !== undefined && formData.length > 0) {
+            for ( var index in list ){
+                var element = list[index];
+                var inFormData = false;
+                
+                console.log('element_id: ' + element._id );
+                for ( var index2 in formData ){
+                    var data = formData[index2];
+                    if (data._id === element._id) {
+                        inFormData = true;
+                    }
+                }
+                if (!inFormData){
+                    filteredList.push(element);
+                }
+            }
+        }
+        else {
+            console.log('in else');
+            filteredList = list;
+        }
+        if (selected !== undefined) {
+            filteredList.push(selected);
+        }
+//        return true;
+         return filteredList;
+    };
+});
+
 app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$window', 'DataService', '$location', function($scope, $http, appdata, $log, $window, DataService, $location) {
         $scope.appdata = appdata;
         $scope.list = '';
@@ -219,9 +255,9 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                           $scope.formData = data.data.object;    
                       }
                       if (appdata.content === 'delete' ){
-                          $scope.title = appdata.submenu + ' löschen';
+                          $scope.title = ' löschen';
                       } else{
-                          $scope.title = appdata.submenu + ' ändern'; 
+                          $scope.title = ' ändern'; 
                       }
                       $scope.object_id = appdata.object;      
                       $log.debug('formData: ' + JSON.stringify($scope.formData));
@@ -231,7 +267,7 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                     //success
                     function (data) { 
                         $scope.formData = data.data.object;
-                        $scope.title = appdata.submenu + ' anlegen'; 
+                        $scope.title = ' anlegen'; 
                         $scope.object_id = undefined;
                         appdata.content = $content;
                     }, //error 
@@ -239,7 +275,7 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                        console.log('error: setting object to undefined');
                        $scope.formData = {};
                        $scope.object_id = undefined;
-                       $scope.title = appdata.submenu + ' anlegen';
+                       $scope.title = ' anlegen';
                    });                
             }
             
@@ -369,7 +405,7 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                         $log.debug('error: setting object to undefined');
                     });   
             } 
-        }
+        },
 
         $scope.signup = function(){
             $http.post('/signup', $scope.formData).then( 
