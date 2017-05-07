@@ -1,16 +1,34 @@
 /* Main Controller */
 var app = angular.module('datasec', ['ngMessages']);
 
-app.directive('dateFormat', function(){ 
-        return {
-            require: 'ngModel', 
-            link: function(scope, element, attr, ngModelCtrl) {
-                ngModelCtrl.$formatters.length = 0;
-                ngModelCtrl.$parsers.length = 0;
+var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
+
+function convertDateStringsToDates(input){
+    for (var key in input) {
+        if (!input.hasOwnProperty(key)) continue;
+
+        var value = input[key];
+        var match;
+        // Check for string properties which look like dates.
+        if (typeof value === "string" && (match = value.match(regexIso8601))) {
+            var milliseconds = Date.parse(match[0]);
+            if (!isNaN(milliseconds)) {
+                input[key] = new Date(milliseconds);
             }
-        };
+        } else if (typeof value === "object") {
+            // Recurse into object
+            convertDateStringsToDates(value);
+        }
+    } 
+};
+
+app.config(["$httpProvider", function ($httpProvider) {
+     $httpProvider.defaults.transformResponse.push(function(responseData){
+        if (typeof responseData !== "object") return responseData;
+        convertDateStringsToDates(responseData);
+        return responseData;
     });
-                
+}]);
 
 app.value('appdata', { msg: '', content: 'default', submenu: 'default', object: undefined, user:null, show_static_data:false, show_data:false, show_status:false});
 
@@ -36,7 +54,7 @@ app.factory("DataService", function($http){
     var is_init = true;
     var fading_time;
     var message_time;
-    
+       
     return {
         is_init : function() { return is_init; },
         set_is_init: function(val) { is_init = val; },

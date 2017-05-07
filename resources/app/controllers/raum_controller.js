@@ -46,10 +46,10 @@ var self = module.exports =  {
                     raum.display = req.body.bezeichnung;
                 }
                 if (req.body.zutrittvon !== undefined & req.body.zutrittvon !== null) {
-                    raum.zutrittvon = req.body.zutrittvon;
+                    raum.zutrittvon = new Date(req.body.zutrittvon);
                 }
                 if (req.body.zutrittbis !== undefined & req.body.zutrittbis !== null) {
-                    raum.zutrittbis = req.body.zutrittbis;
+                    raum.zutrittbis = new Date(req.body.zutrittbis);
                 }
                 if (req.body.beschraenkt === undefined | req.body.beschraenkt === null | req.body.beschraenkt === false ){
                     raum.beschraenkt = false;
