@@ -133,7 +133,7 @@ app.factory("DataService", function($http){
 
 app.filter('filterList', function (){
     return function(list, formData, obj, selected) {
-        var filteredList = [];        
+        var filteredList = [];       
 //        console.log('list: ' + JSON.stringify(list));
 //        console.log('formData: ' + JSON.stringify(formData));
 //        console.log('selected: ' + JSON.stringify(selected));
@@ -142,23 +142,23 @@ app.filter('filterList', function (){
                 var element = list[index];
                 var inFormData = false;
 
-                for ( var index2 in formData ){
-                    var data = formData[index2];
-                    console.log('data: ' + JSON.stringify(data));
+        for ( var index2 in formData ){
+            var data = formData[index2];
+            console.log('data: ' + JSON.stringify(data));
                     // simple object
                     if (obj === null ||obj === undefined){
                         if (data._id === element._id) {
                             inFormData = true;
-                        }
-                    } else {
+                }
+            } else {
                         // complex object
                         if (data._id !== undefined && data[obj]._id === element._id) {
                             console.log('data id: ' + data[obj]._id);
                             inFormData = true;
-                        }
-                    }
                 }
-
+            }
+        }
+        
                 if (!inFormData || ( selected !== undefined && element._id === selected._id )){
                     filteredList.push(element);
                 }
