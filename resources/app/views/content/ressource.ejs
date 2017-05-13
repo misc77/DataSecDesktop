@@ -54,9 +54,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <i class="material-icons prefix">phonelink_setup</i>
-                                                <input type="checkbox" class="filled-in" id="mobiledevmgmt" name="mobiledevmgmt" ng-model="formData.mobiledevmgmt">
                                                 <label for="mobiledevmgmt">Mobile Device Management:</label>
+                                                <i class="material-icons prefix">phonelink_setup</i>
+                                                <input type="checkbox" class="filled-in" id="mobiledevmgmt" name="mobiledevmgmt" ng-model="formData.mobiledevmgmt">                       
                                             </div>     
                                         </div>
                                         <div class="row">
@@ -83,7 +83,7 @@
                                                 ng-init="data._data = { _id: data._id}" 
                                                 ng-change="data._id = data._data._id" 
                                                 ng-model="data._data" 
-                                                ng-options="datum as datum.bezeichnung for datum in dataservice.daten() | filterList:formData.daten:data track by datum._id "
+                                                ng-options="datum as datum.bezeichnung for datum in dataservice.daten() | filterList:formData.daten:null:data track by datum._id "
                                                 ng-if="formData">
                                                 <option value ="" disabled>Wähle eine Datenart</option>
                                             </select>

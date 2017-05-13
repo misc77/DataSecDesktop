@@ -75,14 +75,7 @@ exports.save = function (req, res){
                 musterrolle.raum_zuo = req.body.raum_zuo;
             }
             if (req.body.fahrzeugliste !== undefined & req.body.fahrzeugliste !== null) {
-                musterrolle.fahrzeugliste = [];
-                if (req.body.fahrzeugliste.length > 0){
-                    for( var i = req.body.fahrzeugliste.length-1; i >= 0; --i){
-                        if (req.body.fahrzeugliste[i] !== null & req.body.fahrzeugliste[i] !== undefined){
-                            musterrolle.fahrzeugliste.push(req.body.fahrzeugliste[i]);
-                        }
-                    }
-                }
+                musterrolle.fahrzeugliste = req.body.fahrzeugliste;
             }
             if (req.body.ressource_zuo !== undefined & req.body.ressource_zuo !== null) {
                 musterrolle.ressource_zuo = req.body.ressource_zuo;

@@ -132,21 +132,34 @@ app.factory("DataService", function($http){
 });
 
 app.filter('filterList', function (){
-    return function(list, formData, selected) {
+    return function(list, formData, obj, selected) {
         var filteredList = [];        
-        
-        if (formData !== undefined && formData.length > 0) {
+//        console.log('list: ' + JSON.stringify(list));
+//        console.log('formData: ' + JSON.stringify(formData));
+//        console.log('selected: ' + JSON.stringify(selected));
+        if (formData !== undefined && formData.length > 0 && formData !== null && formData[0] !== null) {
             for ( var index in list ){
                 var element = list[index];
                 var inFormData = false;
 
                 for ( var index2 in formData ){
                     var data = formData[index2];
-                    if (data._id === element._id) {
-                        inFormData = true;
+                    console.log('data: ' + JSON.stringify(data));
+                    // simple object
+                    if (obj === null ||obj === undefined){
+                        if (data._id === element._id) {
+                            inFormData = true;
+                        }
+                    } else {
+                        // complex object
+                        if (data._id !== undefined && data[obj]._id === element._id) {
+                            console.log('data id: ' + data[obj]._id);
+                            inFormData = true;
+                        }
                     }
                 }
-                if (!inFormData){
+
+                if (!inFormData || ( selected !== undefined && element._id === selected._id )){
                     filteredList.push(element);
                 }
             }
@@ -154,10 +167,8 @@ app.filter('filterList', function (){
         else {
             filteredList = list;
         }
-        if (selected !== undefined) {
-            filteredList.push(selected);
-        }
-         return filteredList;
+        console.log('filteredList: ' + JSON.stringify(filteredList));
+        return filteredList;
     };
 });
 
@@ -337,7 +348,6 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
         };
 
         $scope.add_entry = function(list, data){
-            $log.debug('list: ' + JSON.stringify(list));
             if (list !== undefined){
                 list.push(data);
             } else {
