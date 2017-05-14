@@ -196,7 +196,7 @@
                                             <select class="col s5" ng-init="zuo._zutrittsmittel = { _id: formData.berechtigung.zutrittsmittelID}" ng-change="formData.berechtigung.zutrittsmittelID = zuo.zutrittsmittel._id" ng-model="zuo.zutrittsmittel" ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in dataservice.zutrittsmittelliste() track by zutrittsmittel._id">
                                                 <option value="" disabled="" selected="">Bitte Zutrittsmittel wählen</option>
                                             </select>    
-                                            <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.raum_zuo, zuo)"><i class="material-icons">remove</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.berechtigung.raum_zuo, zuo)"><i class="material-icons">remove</i></a>
                                             <script> $(document).ready(function() { $('select').material_select(); });</script>
                                         </div>                                       
                                         <div class="row">
