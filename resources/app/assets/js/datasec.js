@@ -66,6 +66,21 @@ app.factory("DataService", function($http){
         set_statusliste: function(val) { statusliste = val; },
         zutrittsmittelliste: function() { return zutrittsmittelliste; },
         set_zutrittsmittelliste: function(val) { zutrittsmittelliste = val; },
+        zutrittsmittellisteFilter: function(val) { 
+            var filteredList = [];
+            console.log('val: ' + val);
+            for (index in zutrittsmittelliste) {
+                var element = zutrittsmittelliste[index];
+                console.log('element: ' + element._id);
+                console.log('element value: ' + element[val]);
+                if (element[val] === true){
+                    console.log('push element');
+                    filteredList.push(element);
+                }
+            } 
+            return filteredList; },
+        zutrittsmitteltypliste: function() { return zutrittsmitteltypliste; },
+        set_zutrittsmitteltypliste: function(val) { zutrittsmitteltypliste = val; },
         mitarbeiterliste: function() { return mitarbeiterliste; },
         set_mitarbeiterliste: function(val) { mitarbeiterliste = val; },
         aufgabenliste: function() { return aufgabenliste; },
@@ -125,7 +140,7 @@ app.factory("DataService", function($http){
         },
         
         update : function() {
-            this.is_init(true);
+            this.set_is_init(true);
             this.init();
         }
     };
@@ -141,16 +156,15 @@ app.filter('filterList', function (){
 
                 for ( var index2 in formData ){
                     var data = formData[index2];
-                    console.log('data: ' + JSON.stringify(data));
-                            // simple object
-                            if (obj === null ||obj === undefined){
-                                if (data._id === element._id) {
-                                    inFormData = true;
+                        // simple object
+                        if (obj === null ||obj === undefined){
+                            if (data._id === element._id) {
+                                inFormData = true;
                         }
                     } else {
-                                // complex object
-                                if (data._id !== undefined && data[obj]._id === element._id) {
-                                    inFormData = true;
+                        // complex object
+                        if (data._id !== undefined && data[obj]._id === element._id) {
+                            inFormData = true;
                         }
                     }
                 }        
@@ -258,7 +272,8 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                       } else{
                           $scope.title = ' ändern'; 
                       }
-                      $scope.object_id = appdata.object;      
+                      $scope.object_id = appdata.object;    
+                      $log.debug('$scope.object_id ' + $scope.object_id);
                       $log.debug('formData: ' + JSON.stringify($scope.formData));
                 });
             } else {
@@ -277,7 +292,7 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                        $scope.title = ' anlegen';
                    });                
             }
-            
+
             $("#submenu").hide($scope.dataservice.fading_time, function() {
                 $("#content").fadeIn($scope.dataservice.fading_time); 
             });            
@@ -289,7 +304,7 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
             $scope.object_id = undefined;
             $scope.formData = {};
             $scope.content = undefined;
-            $scope.call_submenu(appdata.submenu);
+            $scope.call_submenu(appdata.submenu);            
         };
 
         //Create or Update
@@ -322,6 +337,7 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
 //                        Materialize.toast(appdata.msg, $scope.dataservice.message_time);
                     }); 
             }
+            $scope.dataservice.update();
         };
 
         //Delete

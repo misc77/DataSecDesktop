@@ -21,12 +21,12 @@ var mainWindow = null;
 let tray = null;
 
 console.log('start db');
-  //start up db if down
-  child_process.exec('mongod -dbpath "' + global.db_path + '"', function (err, stdout, stderr) {
-     if(err) {
-         return;
-     } 
-  });
+//start up db if down
+child_process.exec('mongod -dbpath "' + global.db_path + '"', function (err, stdout, stderr) {
+   if(err) {
+       return;
+   } 
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

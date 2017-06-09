@@ -44,8 +44,9 @@ exports.save = function (req, res){
             if (req.body.beschreibung !== undefined & req.body.beschreibung !== null) {
                 fahrzeug.land = req.body.beschreibung;
             }
+            console.log('save ' + req.body.standort._id);
             if (req.body.standort !== undefined & req.body.standort !== null) {
-                fahrzeug.standort = req.body.standort;
+                fahrzeug.standort = req.body.standort._id;
             }
             if (req.body.identnummer !== undefined & req.body.identnummer !== null) {
                 fahrzeug.identnummer = req.body.identnummer;
@@ -79,7 +80,10 @@ exports.save = function (req, res){
 };
 
 exports.list = function(req, res){
-    Fahrzeug.find().exec(function(err, fahrzeuge) {
+    Fahrzeug.find()
+            .populate('standort')
+            .exec(function(err, fahrzeuge)
+            {
         if (err) {
             console.log('err: ' + err);
             return res.status(400).send({

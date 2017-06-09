@@ -119,12 +119,7 @@ var self = module.exports = {
 
     list : function(req, res){
         Mitarbeiter.find()
-                .populate('status')
-                .populate('rolle')
-                .populate('beschaeftigung')
-                .populate('aufgabe')
-                .populate('urlaubsvertretung')
-                .populate('standort')
+                .deepPopulate('status rolle beschaeftigung aufgabe urlaubsvertretung standort berechtigung.tresor_zuo.tresor berechtigung.tresor_zuo.zutrittsmittel berechtigung.ressource_zuo.ressource berechtigung.fahrzeugliste.fahrzeug berechtigung.raum_zuo.raum berechtigung.raum_zuo.zutrittsmittel berechtigung.ressource_zuo.rechte berechtigung.raum_zuo.raum.zutrittsmittel berechtigung.tresor_zuo.tresor.zutrittsmittel')
                 .exec(function(err, mitarbeiter) {
             if (err) {
                 console.log('err: ' + err);

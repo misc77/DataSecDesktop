@@ -164,21 +164,7 @@ var self = module.exports = {
 
     get : function(req, res){
         Mitarbeiter.find({_id: req.query['id']})
-                .populate('status')
-                .populate('rolle')
-                .populate('beschaeftigung')
-                .populate('aufgabe')
-                .populate('urlaubsvertretung')
-                .populate('standort')
-                .populate('berechtigung.tresor_zuo.tresor')
-                .populate('berechtigung.tresor_zuo.zutrittsmittel')
-                .populate('berechtigung.raum_zuo.raum')
-                .populate('berechtigung.raum_zuo.zutrittsmittel')
-                .populate('berechtigung.fahrzeugliste.fahrzeug')
-                .populate('berechtigung.ressource_zuo.ressource')
-                .populate('berechtigung.ressource_zuo.rechte')
-                .populate('berechtigung.hardware_zuo.hardware')
-                .populate('berechtigung.hardware_zuo.rechte')
+                .deepPopulate('status rolle beschaeftigung aufgabe urlaubsvertretung standort berechtigung.tresor_zuo.tresor berechtigung.tresor_zuo.zutrittsmittel berechtigung.ressource_zuo.ressource berechtigung.fahrzeugliste.fahrzeug berechtigung.raum_zuo.raum berechtigung.raum_zuo.zutrittsmittel berechtigung.ressource_zuo.rechte berechtigung.raum_zuo.raum.zutrittsmittel berechtigung.tresor_zuo.tresor.zutrittsmittel')
                 .exec(function(err, mitarbeiter) {
             if (err) {
                 console.log('err: ' + err);
@@ -200,17 +186,7 @@ var self = module.exports = {
         // select musterrolle
         Musterrolle.findOne({   'aufgabe':        new ObjectID(aufgabe_id)
                               , 'beschaeftigung': new ObjectID(beschaeftigung_id) })
-                 .populate('aufgabe' )
-                 .populate('beschaeftigung')
-                 .populate('tresor_zuo.tresor')
-                 .populate('tresor_zuo.zutrittsmittel')
-                 .populate('raum_zuo.raum')
-                 .populate('raum_zuo.zutrittsmittel')
-                 .populate('fahrzeugliste.fahrzeug')
-                 .populate('ressource_zuo.ressource')
-                 .populate('ressource_zuo.rechte')
-                 .populate('hardware_zuo.hardware')
-                 .populate('hardware_zuo.rechte')
+                 .deepPopulate('status rolle beschaeftigung aufgabe urlaubsvertretung standort berechtigung.tresor_zuo.tresor berechtigung.tresor_zuo.zutrittsmittel berechtigung.ressource_zuo.ressource berechtigung.fahrzeugliste.fahrzeug berechtigung.raum_zuo.raum berechtigung.raum_zuo.zutrittsmittel berechtigung.ressource_zuo.rechte berechtigung.raum_zuo.raum.zutrittsmittel berechtigung.tresor_zuo.tresor.zutrittsmittel')
                  .exec(function(err, musterrolle) {
              if (err) {
                  console.log('err: ' + err);            
@@ -254,18 +230,8 @@ var self = module.exports = {
         // select musterrolle
         Musterrolle.findOne({   'aufgabe':        new ObjectID(aufgabe_id)
                               , 'beschaeftigung': new ObjectID(beschaeftigung_id) })
-                 .populate('aufgabe' )
-                 .populate('beschaeftigung')
-                 .populate('tresor_zuo.tresor')
-                 .populate('tresor_zuo.zutrittsmittel')
-                 .populate('raum_zuo.raum')
-                 .populate('raum_zuo.zutrittsmittel')
-                 .populate('fahrzeugliste.fahrzeug')
-                 .populate('ressource_zuo.ressource')
-                 .populate('ressource_zuo.rechte')
-                 .populate('hardware_zuo.hardware')
-                 .populate('hardware_zuo.rechte')
-                 .exec(function(err, musterrolle) {
+                .deepPopulate('status rolle beschaeftigung aufgabe urlaubsvertretung standort berechtigung.tresor_zuo.tresor berechtigung.tresor_zuo.zutrittsmittel berechtigung.ressource_zuo.ressource berechtigung.fahrzeugliste.fahrzeug berechtigung.raum_zuo.raum berechtigung.raum_zuo.zutrittsmittel berechtigung.ressource_zuo.rechte berechtigung.raum_zuo.raum.zutrittsmittel berechtigung.tresor_zuo.tresor.zutrittsmittel')
+                .exec(function(err, musterrolle) {
              if (err) {
                  console.log('err: ' + err);            
              } else {
@@ -303,7 +269,6 @@ var self = module.exports = {
     },
 
     get_new_obj : function(req, res){
-        console.log('in get_new_obj ');
         var mitarbeiter = new Mitarbeiter();
         mitarbeiter.status = undefined;
         mitarbeiter.rolle = undefined;

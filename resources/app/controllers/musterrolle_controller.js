@@ -139,15 +139,7 @@ exports.get_new_obj = function(req, res){
 
 exports.get = function(req, res){
     Musterrolle.find({_id: req.query['id']})
-            .populate('aufgabe' )
-            .populate('beschaeftigung')
-            .populate('tresor_zuo.tresor')
-            .populate('tresor_zuo.zutrittsmittel')
-            .populate('raum_zuo.raum')
-            .populate('raum_zuo.zutrittsmittel')
-            .populate('fahrzeugliste.fahrzeug')
-            .populate('ressource_zuo.ressource')
-            .populate('ressource_zuo.rechte')
+            .deepPopulate('status rolle beschaeftigung aufgabe urlaubsvertretung standort tresor_zuo.tresor tresor_zuo.zutrittsmittel ressource_zuo.ressource fahrzeugliste.fahrzeug raum_zuo.raum raum_zuo.zutrittsmittel ressource_zuo.rechte raum_zuo.raum.zutrittsmittel tresor_zuo.tresor.zutrittsmittel')
             .exec(function(err, musterrolle) {
         if (err) {
             console.log('err: ' + err);

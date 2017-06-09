@@ -27,22 +27,59 @@
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">description</i>
                                                 <input type="text" id="beschreibung" placeholder="Beschreibung des Zutrittsmittels" name="bezeichnung" ng-model="formData.beschreibung">
-                                                <label class="active" for="beschreibung">Beschreibung:</label>
+                                                <label class="active" for="beschreibung">Beschreibung</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label>Merkmale:</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col s4">
+                                                <input type="checkbox" class="filled-in" id="einmalig" name="einmalig" ng-model="formData.einmalig">
+                                                <label for="einmalig">Einmalig:</label>
+                                                <input disabled type="checkbox" class="filled-in" id="tresor" name="zugewiesen" ng-model="formData.zugewiesen">
+                                                <label for="zugewiesen">Zugewiesen</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label>Verwendbar für:</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col s4">
+                                                <input type="checkbox" class="filled-in" id="raum" name="raum" ng-model="formData.access_raum">
+                                                <label for="raum">Raum</label>
+                                                <input type="checkbox" class="filled-in" id="tresor" name="tresor" ng-model="formData.access_tresor">
+                                                <label for="tresor">Tresor</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s6">
+<!--                                                <i class="material-icons prefix">folder</i>-->
+                                                <select class="browser-default" 
+                                                        id="mitarbeiter" 
+                                                        name="mitarbeiter" 
+                                                        ng-model="formData.mitarbeiter" 
+                                                        ng-options="ma._id as ma.display for ma in dataservice.mitarbeiterliste() track by ma._id" material-select="" watch="">
+                                                        <option value="" disabled="" selected="">Bitte zugeordneten Mitarbeiter wählen</option>
+                                                </select>
+                                                <label for="mitarbeiter" class="active">Personalisiert:</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                            <div class="input-field col s6">
-                                                <i class="material-icons prefix">info</i>
+<!--                                                <i class="material-icons prefix">info</i>-->
                                                 <select id="status"
+                                                        class="browser-default"
                                                         name="status"
                                                         ng-init="formData._status = { _id: formData.statusID}" 
                                                         ng-change="formData.statusID = formData.status._id" 
                                                         ng-model="formData.status" 
-                                                        ng-options="status._id as status.bezeichnung for status in dataservice.statusliste() track by status._id">
+                                                        ng-options="status._id as status.bezeichnung for status in dataservice.statusliste() track by status._id" required>
+                                                    <option value="" disabled selected>Bitte einen Status des Zutrittsmittels wählen</option>
                                                 </select>
-                                                <label class="active" for="status" >Status:</label>
+                                                <label for="status" class="active">Status:</label>
                                             </div>  
-                                        </div>
+                                        </div>                                        
                                         <div class="row">
                                             <div class="input-field col s6">
                                                 <i class="material-icons prefix">date_range</i>

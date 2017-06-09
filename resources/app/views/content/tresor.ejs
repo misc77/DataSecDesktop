@@ -4,7 +4,7 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td><h4 class="title">{{title}}</h4></td>
+                                            <td><h4 class="title">Tresor {{title}}</h4></td>
                                             <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="reset()"><i class="material-icons">close</i></a></td>                            
                                         </tr>
                                     </tbody>
@@ -42,6 +42,27 @@
                                     </div>
                                 </div>
                             </div>     
+                            <div class="card blue-grey lighten-5 col s12">
+                                <span class="card-title">Zutrittsmittel</span>
+                                <div class="card-content">
+                                    <div class="row" ng-repeat="zutrittsmittel in formData.zutrittsmittel">                             
+                                        <select class="col s8" material-select watch 
+                                            id="{{ 'zutrittsmittel' + $index }}"
+                                            ng-init="zutrittsmittel._data = { _id: zutrittsmittel._id}" 
+                                            ng-change="zutrittsmittel._id = zutrittsmittel._data._id" 
+                                            ng-model="zutrittsmittel._data" 
+                                            ng-options="zm as zm.bezeichnung for zm in dataservice.zutrittsmittellisteFilter('access_tresor') | filterList:formData.zutrittsmittel:null:zutrittsmittel track by zm._id"
+                                            ng-if="formData">
+                                            <option value ="" disabled>Wähle ein Zutrittsmittel</option>
+                                        </select>
+                                        <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.zutrittsmittel, zutrittsmittel)"><i class="material-icons">remove</i></a>
+                                        <script> $(document).ready(function() { $('select').material_select(); });</script>
+                                    </div>
+                                    <div class="row">
+                                        <a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.zutrittsmittel, {})"><i class="material-icons">add</i></a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card blue-grey lighten-5 col s12">
                                 <span class="card-title">Datenarten</span>
                                 <div class="card-content">

@@ -1,11 +1,6 @@
                     <div id="content">  
                         <div class="row">
                             <form name="fahrzeugForm" novalidate>
-                                <script>
-                                    $(document).ready(function() {
-                                        $('select').material_select('destroy');
-                                    });                                    
-                                </script>
                                 <div class="row">
                                     <table>
                                         <tbody>
@@ -18,39 +13,46 @@
                                 </div>
                                 <div class="card blue-grey lighten-5 col s12">
                                     <div class="card-content">
-                                        <div class="input-field col s12">
-                                            <input type="text" id="kennzeichen" placeholder="Kennzeichen des Fahrzeugs" ng-model="formData.kennzeichen">
-                                            <label class="active" for="kennzeichen">Kennzeichen</label>
-                                            <div class="help-block" ng-messages="fahrzeugForm.kennzeichen.$error" ng-if="fahrzeugForm.kennzeichen.$touched">
-                                                <p ng-message="required" >Kennzeichen ist ein Pflichtfeld!</p>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input type="text" id="kennzeichen" placeholder="Kennzeichen des Fahrzeugs" ng-model="formData.kennzeichen">
+                                                <label class="active" for="kennzeichen">Kennzeichen</label>
+                                                <div class="help-block" ng-messages="fahrzeugForm.kennzeichen.$error" ng-if="fahrzeugForm.kennzeichen.$touched">
+                                                    <p ng-message="required" >Kennzeichen ist ein Pflichtfeld!</p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="input-field col s12">
-                                            <input type="text" id="identnummer" placeholder="Identnummer des Fahrzeugs" ng-model="formData.identnummer">
-                                            <label class="active" for="identnummer">Identnummer</label>
-                                            <!--<div class="help-block" ng-messages="fahrzeugForm.idetnummer.$error" ng-if="fahrzeugForm.identnummer.$touched">
-                                                <p ng-message="required" >Identnummer ist ein Pflichtfeld!</p>
-                                            </div>-->
-                                        </div>
-                                        <div class="input-field col s12">
-                                            <input type="text" id="beschreibung" placeholder="Beschreibung des Fahrzeugs" ng-model="formData.beschreibung">
-                                            <label class="active" for="beschreibung">Beschreibung</label>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input type="text" id="identnummer" placeholder="Identnummer des Fahrzeugs" ng-model="formData.identnummer">
+                                                <label class="active" for="identnummer">Identnummer</label>
+                                                <div class="help-block" ng-messages="fahrzeugForm.idetnummer.$error" ng-if="fahrzeugForm.identnummer.$touched">
+                                                    <p ng-message="required" >Identnummer ist ein Pflichtfeld!</p>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s6">
-                                                <label class="active" for="standort">Standort</label>
-                                                <select id="standort"
-                                                        name="standort"
-                                                        ng-init="formData._standort = { _id: formData.standortID}" 
-                                                        ng-change="formData.standortID = formData.standort._id" 
-                                                        ng-model="formData.standort" 
-                                                        ng-options="standort as standort.bezeichnung for standort in dataservice.standorte() track by standort._id" required>
-
-                                                </select>  
+                                            <div class="input-field col s12">
+                                                <input type="text" id="beschreibung" placeholder="Beschreibung des Fahrzeugs" ng-model="formData.beschreibung">
+                                                <label class="active" for="beschreibung">Beschreibung</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s6" id="select-container">
+                                                <select 
+                                                    class="browser-default"
+                                                    id="standort" 
+                                                    name="standort"
+                                                    ng-model="formData.standort" 
+                                                    ng-options="s as s.bezeichnung for s in dataservice.standorte() track by s._id" 
+                                                    required material-select="" watch="">
+                                                        <option value="" disabled="" selected="">Bitte Standort wählen</option>
+                                                </select> 
                                                 <div class="help-block" ng-messages="fahrzeugForm.standort.$error" ng-if="fahrzeugForm.standort.$touched">
                                                     <p ng-message="required" >Standort ist ein Pflichtfeld!</p>
                                                 </div>
-                                            </div>
+                                                <label for="standort" class="active">Standort</label>                                                
+                                            </div>                                            
                                         </div>
                                         <div class="row">
                                             <div class="input-group col s4">

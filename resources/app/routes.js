@@ -26,7 +26,6 @@ module.exports = function(app) {
     var zutrittsmittelStatus = require('./controllers/zutrittsmittelStatus_controller');
     var mitarbeiterStatus = require('./controllers/mitarbeiterStatus_controller');
     var raum = require('./controllers/raum_controller');
-    var befugniss = require('./controllers/befugniss_controller');
     var report = require('./controllers/report_controller');
     var reportTyp = require('./controllers/reportType_controller');
             
@@ -184,15 +183,17 @@ module.exports = function(app) {
     app.post('/api/zutrittsmittel/delete',      zutrittsmittel.delete); 
     app.get('/api/zutrittsmittel/list',         zutrittsmittel.list) ;
     app.get('/api/zutrittsmittel/get',          zutrittsmittel.get) ;
+    app.get('/api/zutrittsmittel/get_new_obj',  zutrittsmittel.get_new_obj) ;
     
      /**************************
      *     Zutrittsmittel Status Routes 
      ***************************/
-    app.post('/api/zutrittsmittelstatus/create',  zutrittsmittelStatus.create); 
-    app.post('/api/zutrittsmittelstatus/save',    zutrittsmittelStatus.save); 
-    app.post('/api/zutrittsmittelstatus/delete',  zutrittsmittelStatus.delete); 
-    app.get('/api/zutrittsmittelstatus/list',     zutrittsmittelStatus.list) ;
-    app.get('/api/zutrittsmittelstatus/get',      zutrittsmittelStatus.get) ;
+    app.post('/api/zutrittsmittelstatus/create',     zutrittsmittelStatus.create); 
+    app.post('/api/zutrittsmittelstatus/save',       zutrittsmittelStatus.save); 
+    app.post('/api/zutrittsmittelstatus/delete',     zutrittsmittelStatus.delete); 
+    app.get('/api/zutrittsmittelstatus/list',        zutrittsmittelStatus.list) ;
+    app.get('/api/zutrittsmittelstatus/get',         zutrittsmittelStatus.get) ;
+    app.get('/api/zutrittsmittelstatus/get_new_obj', zutrittsmittelStatus.get_new_obj) ;
     
     /**************************
      *     Mitarbeiter Status Routes 
@@ -202,6 +203,7 @@ module.exports = function(app) {
     app.post('/api/mitarbeiterstatus/delete',  mitarbeiterStatus.delete); 
     app.get('/api/mitarbeiterstatus/list',     mitarbeiterStatus.list) ;
     app.get('/api/mitarbeiterstatus/get',      mitarbeiterStatus.get) ;
+    
     
      /**************************
      *     Raum Routes 

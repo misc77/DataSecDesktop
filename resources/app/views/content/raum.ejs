@@ -51,7 +51,7 @@
                                             ng-init="zutrittsmittel._data = { _id: zutrittsmittel._id}" 
                                             ng-change="zutrittsmittel._id = zutrittsmittel._data._id" 
                                             ng-model="zutrittsmittel._data" 
-                                            ng-options="zm as zm.bezeichnung for zm in dataservice.zutrittsmittelliste() | filterList:formData.zutrittsmittel:null:zutrittsmittel track by zm._id"
+                                            ng-options="zm as zm.bezeichnung for zm in dataservice.zutrittsmittellisteFilter('access_raum') | filterList:formData.zutrittsmittel:null:zutrittsmittel track by zm._id"
                                             ng-if="formData">
                                             <option value ="" disabled>Wähle ein Zutrittsmittel</option>
                                         </select>

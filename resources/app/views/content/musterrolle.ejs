@@ -60,7 +60,7 @@
                                                     ng-init="zuo._zutrittsmittel = { _id: formData.zutrittsmittelID}" 
                                                     ng-change="formData.zutrittsmittelID = zuo.zutrittsmittel._id" 
                                                     ng-model="zuo.zutrittsmittel" 
-                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in dataservice.zutrittsmittelliste() track by zutrittsmittel._id">
+                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in zuo.tresor.zutrittsmittel track by zutrittsmittel._id">
                                                 <option value="" disabled="" selected="">Bitte Zutrittsmittel wählen</option>
                                             </select>    
                                             <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.tresor_zuo, zuo)"><i class="material-icons">remove</i></a>
@@ -87,7 +87,7 @@
                                                     ng-init="zuo._zutrittsmittel = { _id: formData.zutrittsmittelID}" 
                                                     ng-change="formData.zutrittsmittelID = zuo.zutrittsmittel._id" 
                                                     ng-model="zuo.zutrittsmittel" 
-                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in dataservice.zutrittsmittelliste() track by zutrittsmittel._id">
+                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in zuo.raum.zutrittsmittel track by zutrittsmittel._id">
                                                 <option value="" disabled="" selected="">Bitte Zutrittsmittel wählen</option>
                                             </select>    
                                             <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.raum_zuo, zuo)"><i class="material-icons">remove</i></a>

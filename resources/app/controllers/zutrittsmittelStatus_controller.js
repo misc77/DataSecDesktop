@@ -86,3 +86,12 @@ exports.get = function(req, res){
         }
     });
 };
+
+exports.get_new_obj = function(req,res){
+    var status = new ZutrittsmittelStatus();
+    status.set('bezeichnung', 'neu');
+    status.set('display', 'neu');
+    status.set('beschreibung', 'neu'); 
+    status.set('gueltig', true);    
+    res.json({object : typ});
+};

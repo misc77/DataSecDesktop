@@ -4,6 +4,9 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/DataSec');
 var Schema = mongoose.Schema;
+var Promise = require('bluebird');
+Promise.promisifyAll(mongoose);
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var protokollSchema = new Schema ({
     user:      { type: Schema.Types.ObjectId, ref: 'user'},
@@ -51,6 +54,7 @@ var reportSchema = new Schema({
                  
 });
 var Report = mongoose.model("report", reportSchema);
+reportSchema.plugin(deepPopulate);
 
 /* Aufgabe */
 var aufgabeSchema = new Schema({
@@ -194,6 +198,7 @@ var mitarbeiterSchema = new Schema({
     protokoll:      [{ type: Schema.Types.ObjectId, ref: 'protokoll' }]
 });
 var Mitarbeiter = mongoose.model("mitarbeiter", mitarbeiterSchema);
+mitarbeiterSchema.plugin(deepPopulate);
 
 /* Papierdokument */
 var papierdokumentSchema = new Schema({
@@ -217,12 +222,14 @@ var Rolle = mongoose.model("rolle", rolleSchema);
 
 /* Tresor */
 var tresorSchema = new Schema({
-    bezeichnung:    String,
-    display:        String,
-    beschreibung:   String,
-    aktiv:          Boolean,
-    daten:          [{type: Schema.Types.ObjectId, ref: 'daten'}],
-    protokoll:      [{ type: Schema.Types.ObjectId, ref: 'protokoll' }]
+    bezeichnung:        String,
+    display:            String,
+    beschreibung:       String,
+    aktiv:              Boolean,
+    raum:               {type: Schema.Types.ObjectId, ref: 'raum'},
+    zutrittsmittel:     [{type: Schema.Types.ObjectId, ref: 'zutrittsmittel'}],
+    daten:              [{type: Schema.Types.ObjectId, ref: 'daten'}],
+    protokoll:          [{ type: Schema.Types.ObjectId, ref: 'protokoll' }]
 });
 var Tresor = mongoose.model("tresor", tresorSchema);
 
@@ -254,13 +261,18 @@ var MitarbeiterStatus = mongoose.model("mitarbeiterStatus", mitarbeiterStatusSch
 
 /* Zutrittsmittel */
 var zutrittsmittelSchema = new Schema({
-    bezeichnung:  String,
-    display:      String,
-    beschreibung: String,
-    ausgabe:      Date,
-    rueckgabe:    Date,
-    status:       { type: Schema.Types.ObjectId, ref : 'zutrittsmittelStatus' },
-    protokoll:      [{ type: Schema.Types.ObjectId, ref: 'protokoll' }]
+    bezeichnung:   String,
+    display:       String,
+    beschreibung:  String,
+    ausgabe:       Date,
+    rueckgabe:     Date,
+    status:        { type: Schema.Types.ObjectId, ref : 'zutrittsmittelStatus' },
+    access_raum:   Boolean,
+    access_tresor: Boolean,
+    einmalig:      Boolean,
+    zugewiesen:    Boolean,
+    mitarbeiter:   { type: Schema.Types.ObjectId, ref : 'mitarbeiter' },
+    protokoll:     [{ type: Schema.Types.ObjectId, ref: 'protokoll' }]
 });
 var Zutrittsmittel = mongoose.model("zutrittsmittel", zutrittsmittelSchema);
 
@@ -272,6 +284,15 @@ var zutrittsmittelsStatusSchema = new Schema({
     gueltig:        Boolean
 });
 var ZutrittsmittelStatus = mongoose.model("zutrittsmittelStatus", zutrittsmittelsStatusSchema);
+
+/* Zutrittsmittel Status */
+var zutrittsmittelsTypSchema = new Schema({
+    bezeichnung:    String,
+    display:        String,
+    beschreibung:   String,
+    gueltig:        Boolean
+});
+var ZutrittsmittelTyp = mongoose.model("zutrittsmittelTyp", zutrittsmittelsTypSchema);
 
 /* Raum */
 var raumSchema = new Schema({
@@ -305,6 +326,7 @@ var musterrolleSchema = new Schema({
     aktiv:              Boolean
 });
 var Musterrolle = mongoose.model("musterrolle", musterrolleSchema);
+musterrolleSchema.plugin(deepPopulate);
 
 /* Befugniss */
 /** Haupt-Collection zur Zuordnung der Befugnisse pro Mitarbeiter auf Basis der Musterrolle **/
@@ -326,6 +348,7 @@ var befugnissSchema = new Schema({
     protokoll:      [{ type: Schema.Types.ObjectId, ref: 'protokoll' }]
 });
 var Befugniss = mongoose.model("befugniss", befugnissSchema);
+befugnissSchema.plugin(deepPopulate);
 
 /* Log */
 var logSchema = new Schema({
@@ -395,6 +418,7 @@ module.exports = {    Musterrolle : Musterrolle
                     , User : User
                     , Zutrittsmittel : Zutrittsmittel
                     , ZutrittsmittelStatus : ZutrittsmittelStatus
+                    , ZutrittsmittelTyp : ZutrittsmittelTyp
                     , Protokoll : Protokoll
                     , Report: Report
                     , ReportType: ReportType};
