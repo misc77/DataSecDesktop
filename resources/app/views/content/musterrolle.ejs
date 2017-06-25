@@ -49,45 +49,46 @@
                                     <span class="card-title">Tresorzugriff</span>
                                     <div class="card-content">
                                         <div class="input-group row" ng-repeat="zuo in formData.tresor_zuo">
-                                            <select class="col s5" 
-                                                    ng-init="zuo._tresor = { _id: formData.tresorID}" 
-                                                    ng-change="formData.tresorID = tresor._id" 
-                                                    ng-model="zuo.tresor" 
-                                                    ng-options="tresor._id as tresor.bezeichnung for tresor in dataservice.tresorliste() | filterList:formData.tresor_zuo:'tresor':zuo.tresor track by tresor._id">
+                                            <select class="col s5"
+                                                    ng-disabled="zuo.tresor !== undefined"
+                                                    ng-model="zuo._tresor"
+                                                    ng-init="zuo._tresor = { _id : zuo.tresor._id }"
+                                                    ng-change="zuo.tresor = zuo._tresor"
+                                                    ng-options="tresor._id as tresor.bezeichnung for tresor in dataservice.tresorliste() | filterList:formData.tresor_zuo:'tresor':zuo._tresor track by tresor._id">
                                                 <option value="" disabled="" selected="">Bitte Tresor wählen</option>
                                             </select>
-                                            <select class="col s5" 
-                                                    ng-init="zuo._zutrittsmittel = { _id: formData.zutrittsmittelID}" 
-                                                    ng-change="formData.zutrittsmittelID = zuo.zutrittsmittel._id" 
-                                                    ng-model="zuo.zutrittsmittel" 
-                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in zuo.tresor.zutrittsmittel track by zutrittsmittel._id">
-                                                <option value="" disabled="" selected="">Bitte Zutrittsmittel wählen</option>
-                                            </select>    
-                                            <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.tresor_zuo, zuo)"><i class="material-icons">remove</i></a>
                                             <script> $(document).ready(function() { $('select').material_select(); });</script>
+                                            <select class="col s5" 
+                                                    ng-disabled="zuo.zutrittsmittel !== undefined"
+                                                    ng-model="zuo.zutrittsmittel" 
+                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in dataservice.zutrittsmittellisteFilter('access_tresor') track by zutrittsmittel._id">
+                                                <option value="" disabled="" selected="">Bitte Zutrittsmittel wählen</option>
+                                            </select>  
+                                            
+                                            <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.tresor_zuo, zuo)"><i class="material-icons">remove</i></a>
+                                            
                                         </div>
                                         <div class="row">
-                                            <a ng-if="formData.tresor_zuo.length < dataservice.tresorliste().length" class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.tresor_zuo, {})"><i class="material-icons">add</i></a>                       
+                                            <a ng-if="formData.tresor_zuo.length < dataservice.tresorliste().length" class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="add_entry(formData.tresor_zuo, {})"><i class="material-icons">add</i></a>
                                         </div>
                                     </div>                                    
-                                </div>
+                                </div>                                   
                                 <!-- Räumlichkeiten --> 
-                                <div class="card blue-grey lighten-5 col s12">
+                               <div class="card blue-grey lighten-5 col s12">
                                     <span class="card-title">Zutritt Räumlichkeiten</span>
                                     <div class="card-content">
                                         <div class="input-group row" ng-repeat="zuo in formData.raum_zuo">
                                             <select class="col s5" 
+                                                    ng-disabled="zuo.raum !== undefined"
                                                     ng-init="zuo._raum = { _id: formData.raumID}" 
                                                     ng-change="formData.raumID = raum._id" 
-                                                    ng-model="zuo.raum" 
-                                                    ng-options="raum._id as raum.bezeichnung for raum in dataservice.raumliste() | filterList:formData.raum_zuo:'raum':zuo.raum track by raum._id">
+                                                    ng-model="zuo.raum" ng-options="raum._id as raum.bezeichnung for raum in dataservice.raumliste() | filterList:formData.raum_zuo:'raum':zuo.raum track by raum._id">
                                                 <option value="" disabled="" selected="">Bitte Räumlichkeit wählen</option>
                                             </select>
                                             <select class="col s5" 
-                                                    ng-init="zuo._zutrittsmittel = { _id: formData.zutrittsmittelID}" 
-                                                    ng-change="formData.zutrittsmittelID = zuo.zutrittsmittel._id" 
+                                                    ng-disabled="zuo.zutrittsmittel !== undefined"
                                                     ng-model="zuo.zutrittsmittel" 
-                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in zuo.raum.zutrittsmittel track by zutrittsmittel._id">
+                                                    ng-options="zutrittsmittel._id as zutrittsmittel.bezeichnung for zutrittsmittel in dataservice.zutrittsmittellisteFilter('access_raum') track by zutrittsmittel._id">
                                                 <option value="" disabled="" selected="">Bitte Zutrittsmittel wählen</option>
                                             </select>    
                                             <a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="remove_entry(formData.raum_zuo, zuo)"><i class="material-icons">remove</i></a>
