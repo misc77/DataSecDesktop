@@ -20,6 +20,11 @@ gulp.task('copy-materialize-js', function() {
     .pipe(gulp.dest('./resources/app/node_modules/materialize'));
 });
 
+gulp.task('copy-config', function() {
+    gulp.src('./resources/app/config.json')
+    .pipe(gulp.dest('C:/Users/misc2/AppData/Roaming/DataSec'));
+});
+
 // create the gulp task
 gulp.task('run', function () { 
   childProcess.spawn(electron, ['./resources/app'], { stdio: 'inherit' }); 

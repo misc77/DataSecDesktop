@@ -31,27 +31,8 @@ var reportSchema = new Schema({
     bezeichnung:   String,
     display:       String,
     beschreibung:  String,
-    type:          { type: Schema.Types.ObjectId, ref: 'reportType' },
-    raum_zuo:        [ { raum:           {type: Schema.Types.ObjectId, ref: 'raum'}, 
-                         zutrittsmittel: {type: Schema.Types.ObjectId, ref: 'zutrittsmittel' } }],
-    tresor_zuo:      [ { tresor:         {type: Schema.Types.ObjectId, ref: 'tresor'},
-                         zutrittsmittel: {type: Schema.Types.ObjectId, ref: 'zutrittsmittel' } }],
-    fahrzeugliste:   [ { fahrzeug:       {type: Schema.Types.ObjectId, ref: 'fahrzeug'} }],
-    hardware_zuo:    [ { hardware:       {type: Schema.Types.ObjectId, ref: 'hardware'},
-                         berechtigung:   {type: Schema.Types.ObjectId, ref: 'berechtigung'} }],
-    ressource_zuo:   [ { ressource:      {type: Schema.Types.ObjectId, ref: 'ressource'},
-                         rechte:         {type: Schema.Types.ObjectId, ref: 'rechte'} }],
-    byod:              Boolean,
-    fernzugriff:       Boolean,
-    daten:             [{type: Schema.Types.ObjectId, ref:'daten' }],
-    standort:           {type: Schema.Types.ObjectId, ref: 'standort'},
-    aufgabe:            {type: Schema.Types.ObjectId, ref: 'aufgabe'},
-    status:             {type: Schema.Types.ObjectId, ref: 'mitarbeiterStatus'},
-    beschaeftigung:     {type: Schema.Types.ObjectId, ref: 'beschaeftigung'},
-    statusSeit:         Date,
-    rolle:              {type: Schema.Types.ObjectId, ref: 'rolle'},
-    urlaubsvertretung:  {type: Schema.Types.ObjectId, ref: 'mitarbeiter'}                    
-                 
+    model:         String,
+    query:         [ { attribute: String, value: String }]                                
 });
 var Report = mongoose.model("report", reportSchema);
 reportSchema.plugin(deepPopulate);

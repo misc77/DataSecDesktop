@@ -17,7 +17,6 @@ module.exports = function(app) {
     var daten = require('./controllers/daten_controller');
     var rolle = require('./controllers/rolle_controller');
     var fahrzeug = require('./controllers/fahrzeug_controller');
-    var hardware = require('./controllers/hardware_controller');
     var ressource = require('./controllers/ressource_controller');
     var ressourcentyp = require('./controllers/ressourcentyp_controller');
     var tresor = require('./controllers/tresor_controller');
@@ -27,7 +26,6 @@ module.exports = function(app) {
     var mitarbeiterStatus = require('./controllers/mitarbeiterStatus_controller');
     var raum = require('./controllers/raum_controller');
     var report = require('./controllers/report_controller');
-    var reportTyp = require('./controllers/reportType_controller');
             
     /**************************
      *      General Routes 
@@ -126,16 +124,7 @@ module.exports = function(app) {
     app.post('/api/fahrzeug/delete',    fahrzeug.delete); 
     app.get('/api/fahrzeug/list',       fahrzeug.list) ;
     app.get('/api/fahrzeug/get',        fahrzeug.get) ;
-    
-    /**************************
-     *      Hardware Routes 
-     ***************************/
-    app.post('/api/hardware/create',    hardware.create); 
-    app.post('/api/hardware/save',      hardware.save); 
-    app.post('/api/hardware/delete',    hardware.delete); 
-    app.get('/api/hardware/list',       hardware.list) ;
-    app.get('/api/hardware/get',        hardware.get) ;
-    
+       
     /**************************
      *      Ressource Routes 
      ***************************/
@@ -234,17 +223,7 @@ module.exports = function(app) {
     app.get('/api/auswertungen/list',           report.list) ;
     app.get('/api/auswertungen/get',            report.get) ;
     app.get('/api/auswertungen/get_new_obj',    report.get_new_obj);
-    app.get('/api/auswertungen/query',          report.query);    
-    
-    /**************************
-     *      Report Typen Routes 
-     ***************************/
-    app.post('/api/reporttyp/create',        reportTyp.create );
-    app.post('/api/reporttyp/save',          reportTyp.save); 
-    app.post('/api/reporttyp/delete',        reportTyp.delete); 
-    app.get('/api/reporttyp/list',           reportTyp.list) ;
-    app.get('/api/auswertungen/get_new_obj', reportTyp.get_new_obj);
-    app.get('/api/reporttyp/get',            reportTyp.get) ;
+    app.get('/api/auswertungen/query',          report.query);     
          
     /**************************
      *      USER Routes 

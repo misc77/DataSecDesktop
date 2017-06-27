@@ -2,10 +2,26 @@
   "name": "DataSecDesktop",
   "version": "0.0.1",
   "private": true,
+  "main": "resources/app/main.js",
   "scripts": {
     "start": "electron resources/app",
-    "pack": "build --dir",
-    "dist": "build"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "files": 
+     [ "resources/app/assets",
+       "resources/app/controllers",
+       "resources/app/database",
+       "resources/app/models",
+       "resources/app/views",
+       "resources/app/*.js",
+       "resources/app/*.json",
+       "resources/app/node_modules"
+     ]
+  ,
+  "postinstall": "electron-builder install-app-deps",
+  "build": {
+        "asar" : true
   },
   "dependencies": {
     "asar": "^0.13.0",
@@ -19,8 +35,9 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "electron": "^1.6.6",
-    "electron-packager": "^8.6.0",
+    "electron": "^1.6.11",
+    "electron-builder": "^19.8.0",
+    "electron-packager": "^8.7.2",
     "fs-jetpack": "^0.13.2",
     "gulp": "^3.9.1",
     "gulp-electron": "^0.1.3",

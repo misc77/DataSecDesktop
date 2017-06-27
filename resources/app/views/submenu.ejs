@@ -489,28 +489,13 @@
                     </tr>   
                     <tr ng-repeat="item in list | filter:filter">
                         <td colspan="3"><a class="indigo-text netvocat" ng-click="call_content('report', item._id)">{{ item.display }}</a></td>
+                        <td><a class="btn-floating btn-small waves-effect waves-light green netvocat" ng-click="render_report(item._id)"><i class="material-icons">play_circle_filled</i></a></td>
+                        <td><a class="btn-floating btn-small waves-effect waves-light red netvocat" ng-click="call_content('delete', item._id)"><i class="material-icons">remove</i></a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        
-        <!-- Auswertungstype -->
-        <div ng-switch-when="reporttyp" id="submenu" class="card-panel blue-grey lighten-4">
-            <table class="highlight">
-                <tbody>
-                    <tr>
-                        <td><h4>Auswertungsarten</h4></td>
-                        <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="call_content('reporttyp')"><i class="material-icons">add</i></a></td>
-                        <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="hide_submenu()"><i class="material-icons">import_export</i></a></td>
-                        <td><a class="btn-floating btn-small waves-effect waves-light indigo netvocat" ng-click="hide_submenu()"><i class="material-icons">close</i></a></td>
-                    </tr> 
-                    <tr ng-repeat="item in list | filter:filter">
-                        <td colspan="4"><a class="indigo-text netvocat" ng-click="call_content('reporttyp', item._id)">{{ item.display }}</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-            
+       
         <!-- Default --> 
         <div ng-switch-default>
             <p></p>

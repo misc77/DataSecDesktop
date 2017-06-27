@@ -50,6 +50,7 @@ app.factory("DataService", function($http){
     var hardwareliste = {};
     var ressourcentypliste = {};
     var rechteliste = {};
+    var modelliste = {};
     var ressourcenliste = {};
     var is_init = true;
     var fading_time;
@@ -112,7 +113,16 @@ app.factory("DataService", function($http){
         fading_time: function() { return fading_time; },
         set_message_time : function(val) { message_time = val; },
         message_time: function() { return message_time; },
-        
+        modelliste : function () { 
+            modelliste = {};
+            modelliste.push('Fahrzeug');
+            modelliste.push('Mitarbeiter');
+            modelliste.push('Raum');
+            modelliste.push('Ressource');
+            modelliste.push('Standort');
+            modelliste.push('Tresor');
+            modelliste.push('User');
+        },        
         init: function() {
             if (is_init){
                 // loading data
@@ -297,6 +307,26 @@ app.controller('DataSecController', ['$scope', '$http', 'appdata', '$log', '$win
                 $("#content").fadeIn($scope.dataservice.fading_time); 
             });            
         };
+        
+        $scope.render_report = function() {
+            if (appdata.object !== undefined) {
+                $http.get('/api/auswertungen/query',{params: { id : appdata.object}}).then( 
+                  function(data) { 
+                      
+                      if (data.data.object[0] !== undefined) {
+                          $scope.formData = data.data.object[0];
+                      } else {
+                          $scope.formData = data.data.object;    
+                      }
+                      $scope.object_id = appdata.object;    
+                      $log.debug('$scope.object_id ' + $scope.object_id);
+                      $log.debug('formData: ' + JSON.stringify($scope.formData));
+                });
+            } 
+            $("#submenu").hide($scope.dataservice.fading_time, function() {
+                $("#content").fadeIn($scope.dataservice.fading_time); 
+            });       
+        }
         
         //Reset
         $scope.reset = function(){

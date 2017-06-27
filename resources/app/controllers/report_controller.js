@@ -12,7 +12,8 @@ var self = module.exports = {
         report.set('display',          req.body.bezeichnung);
         report.set('bezeichnung',      req.body.bezeichnung);
         report.set('beschreibung',     req.body.beschreibung);
-        report.set('abfrage',          req.body.abfrage);
+        report.set('model',            req.body.model);
+        report.set('query',            req.body.query);
         
         report.save(function(err){
             if(err){
@@ -34,7 +35,19 @@ var self = module.exports = {
     },
     
     query : function (req, res) {
-        return null;
+        Report.findOne({_id: req.body._id}, function(err){
+            if (err){
+                console.log('err: ' + err);
+            } else {
+                var query = {};
+                //TODO: Add query generation!
+//                for 
+//                mongoose.model(req.body.model).find({ );
+//                
+//                }
+                res.json(null);
+            }
+        });
     },
 
     save : function (req, res){
@@ -54,8 +67,11 @@ var self = module.exports = {
                     if (req.body.beschreibung !== undefined & req.body.beschreibung !== null) {
                         report.beschreibung = req.body.beschreibung;
                     }
-                    if (req.body.abrage !== undefined & req.body.abfrage !== null) {
-                        report.abfrage = req.body.abfrage;
+                    if (req.body.model !== undefined & req.body.model !== null) {
+                        report.model = req.body.model;
+                    }
+                    if (req.body.query !== undefined & req.body.query !== null) {
+                        report.query = req.body.query;
                     }
                    
                     report.save(
@@ -74,7 +90,7 @@ var self = module.exports = {
 
     list : function(req, res){
         Report.find()
-                .populate('abfrage')
+                .populate('query')
                 .exec(function(err, report) {
             if (err) {
                 console.log('err: ' + err);
@@ -89,7 +105,7 @@ var self = module.exports = {
 
     get : function(req, res){
         Report.find({_id: req.query['id']})
-            .populate('standort')
+            .populate('query')
             .exec(function(err, report) {
             if (err) {
                 console.log('err: ' + err);
@@ -104,14 +120,10 @@ var self = module.exports = {
     
     get_new_obj : function(req, res){
         var report = new Report();
-            report.set('standort',          null);
-            report.set('status',            null);
-            report.set('aufgabe',           null);
-            report.set('urlaubsvertretung', null);
-            report.set('beschaeftigung',    null)
             report.set('bezeichnung',       'neu');
             report.set('beschreibung',      'neu');
-            
+            report.set('query',             {});
+            report.set('model',             null);            
         res.json({object : report});
     }
 };

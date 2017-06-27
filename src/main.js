@@ -8,11 +8,11 @@ const ipcRenderer = require('electron').ipcRenderer;
 const Config = require('electron-config');
 var child_process = require('child_process');
 
+app.setPath('userData', app.getAppPath());
+
 const config = new Config('conf');
 global.directory = { path: __dirname };
 global.db_path = config.get('db_path');
-
-console.log('userData: ' + app.getPath('userData'));
 
 const iconPath = path.join(__dirname, config.get('icon_path'));
 const admin = "'admin'";
@@ -55,9 +55,7 @@ app.on('ready', function () {
     mainWindow.loadURL('http://localhost');
 
     // Open the devtools.
-    if (config.get('mode') === 'debug') {
-        mainWindow.openDevTools();
-    }
+    mainWindow.openDevTools();
 
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
